@@ -70,19 +70,18 @@ public class DualPivotQuicksort {
      */
 
     /**
-     * Sorts the specified range of the array using the given
-     * workspace array slice if possible for merging
+     * 如果可以合并的话, 将指定范围的数组根据特定的数组长度进行切割然后排序
      *
-     * @param a the array to be sorted
-     * @param left the index of the first element, inclusive, to be sorted
-     * @param right the index of the last element, inclusive, to be sorted
-     * @param work a workspace array (slice)
-     * @param workBase origin of usable space in work array
-     * @param workLen usable size of work array
+     * @param a 将要被排序的数组
+     * @param left 将要被排序的数组的第一个元素的下标(含)
+     * @param right 将要被排序的数组的最后一个元素的下标(含)
+     * @param work 切割的工作区数组
+     * @param workBase 工作区数组中可用空间的起源
+     * @param workLen 工作区数组的长度
      */
     static void sort(int[] a, int left, int right,
                      int[] work, int workBase, int workLen) {
-        // Use Quicksort on small arrays
+        // 小数据量的数组使用快速排序
         if (right - left < QUICKSORT_THRESHOLD) {
             sort(a, left, right, true);
             return;
@@ -90,16 +89,16 @@ public class DualPivotQuicksort {
 
         /*
          * Index run[i] is the start of i-th run
-         * (ascending or descending sequence).
+         * (升序或降序).
          */
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0; run[0] = left;
 
-        // Check if the array is nearly sorted
+        // 检查数组是否几乎排序好了
         for (int k = left; k < right; run[count] = k) {
-            if (a[k] < a[k + 1]) { // ascending
+            if (a[k] < a[k + 1]) { // 升序
                 while (++k <= right && a[k - 1] <= a[k]);
-            } else if (a[k] > a[k + 1]) { // descending
+            } else if (a[k] > a[k + 1]) { // 降序
                 while (++k <= right && a[k - 1] >= a[k]);
                 for (int lo = run[count] - 1, hi = k; ++lo < --hi; ) {
                     int t = a[lo]; a[lo] = a[hi]; a[hi] = t;
@@ -113,7 +112,9 @@ public class DualPivotQuicksort {
                 }
             }
 
+            //TODO ?
             /*
+             * 数组没有高度结构化使用快速排序来替代归并排序
              * The array is not highly structured,
              * use Quicksort instead of merge sort.
              */
@@ -123,27 +124,31 @@ public class DualPivotQuicksort {
             }
         }
 
-        // Check special cases
-        // Implementation note: variable "right" is increased by 1.
-        if (run[count] == right++) { // The last run contains one element
+        // 检查特殊案例
+        // TODO ?
+        // 实施笔记: 变量 "right"每次都自增1
+        if (run[count] == right++) { // 最后一次运行包含一个函数
             run[++count] = right;
-        } else if (count == 1) { // The array is already sorted
+        } else if (count == 1) { // 数组已经被排序
             return;
         }
 
+        // TODO odd ^= 1 真令人头大
         // Determine alternation base for merge
+        // n <<= 1  表示  n = n*2   n <<1  表示 n*2
         byte odd = 0;
         for (int n = 1; (n <<= 1) < count; odd ^= 1);
 
-        // Use or create temporary array b for merging
-        int[] b;                 // temp array; alternates with a
-        int ao, bo;              // array offsets from 'left'
-        int blen = right - left; // space needed for b
+        // 使用或者创建一个临时数组b来做归并操作
+        int[] b;                 // 临时数组; 代替a
+        int ao, bo;              // 从 'left' 开始的数组偏移量
+        int blen = right - left; // 数组b需要的空间
         if (work == null || workLen < blen || workBase + blen > work.length) {
             work = new int[blen];
             workBase = 0;
         }
         if (odd == 0) {
+            // 注释: 从a数组的left复制blen长度的元素到work数组的workBase位置开始复制
             System.arraycopy(a, left, work, workBase, blen);
             b = a;
             bo = 0;
@@ -155,7 +160,7 @@ public class DualPivotQuicksort {
             bo = workBase - left;
         }
 
-        // Merging
+        // 合并
         for (int last; count > 1; count = last) {
             for (int k = (last = 0) + 2; k <= count; k += 2) {
                 int hi = run[k], mi = run[k - 1];
@@ -179,24 +184,24 @@ public class DualPivotQuicksort {
         }
     }
 
+    // TODO ? leftmost僵硬...
     /**
-     * Sorts the specified range of the array by Dual-Pivot Quicksort.
+     *  通过Dual-Pivot快速排序对指定范围的数组进行排序
      *
-     * @param a the array to be sorted
-     * @param left the index of the first element, inclusive, to be sorted
-     * @param right the index of the last element, inclusive, to be sorted
-     * @param leftmost indicates if this part is the leftmost in the range
+     * @param a 将要被排序的数组
+     * @param left 第一个需要被排序的元素的下标(包含该元素)
+     * @param right 最后一个需要被排序的元素的下标(包含该元素)
+     * @param leftmost 表明这部分是否是该范围的最左边
      */
     private static void sort(int[] a, int left, int right, boolean leftmost) {
         int length = right - left + 1;
 
-        // Use insertion sort on tiny arrays
+        // 长度小于47(tiny array)数组用插入排序
         if (length < INSERTION_SORT_THRESHOLD) {
             if (leftmost) {
                 /*
-                 * Traditional (without sentinel) insertion sort,
-                 * optimized for server VM, is used in case of
-                 * the leftmost part.
+                 * 传统插入排序(没有哨兵), 针对服务器VM进行优化,
+                 * 被用于最左部分的案例中
                  */
                 for (int i = left, j = i; i < right; j = ++i) {
                     int ai = a[i + 1];
@@ -210,7 +215,7 @@ public class DualPivotQuicksort {
                 }
             } else {
                 /*
-                 * Skip the longest ascending sequence.
+                 * 跳过最长的升序部分
                  */
                 do {
                     if (left >= right) {
@@ -219,12 +224,10 @@ public class DualPivotQuicksort {
                 } while (a[++left] >= a[left - 1]);
 
                 /*
-                 * Every element from adjoining part plays the role
-                 * of sentinel, therefore this allows us to avoid the
-                 * left range check on each iteration. Moreover, we use
-                 * the more optimized algorithm, so called pair insertion
-                 * sort, which is faster (in the context of Quicksort)
-                 * than traditional implementation of insertion sort.
+                 *  每个相邻的节点扮演着一个哨兵的角色, 所以它让我们可以
+                 *  避免每次排序都和左边节点比较. 此外, 我们用了更多的优化算法,
+                 *  所以我们称它为对插入排序, 在快速排序的范畴中, 它比用传统方式
+                 *  实现的插入排序更快
                  */
                 for (int k = left; ++left <= right; k = ++left) {
                     int a1 = a[k], a2 = a[left];
