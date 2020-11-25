@@ -1,27 +1,14 @@
 package com.ohyoung.structure.linkedlist;
 
 /**
- *  实现一个单项链表
+ * 双向循环链表
  *
  * @author ohYoung
- * @date 2020/11/25 17:04
+ * @date 2020/11/25 18:32
  */
-public class MyLinkedList {
+public class DoublyCycle {
 
-    /**
-     *  单链表反转
-     *  链表中环的检测
-     *  两个有序的链表合并
-     *  删除链表倒数第 n 个结点
-     *  求链表的中间结点
-     */
-
-    /**
-     *  头节点
-     */
     Node head = null;
-
-
 
     class Node {
         Node next = null;
@@ -36,13 +23,15 @@ public class MyLinkedList {
         Node newNode = new Node(data);
         if (head == null) {
             head = newNode;
+            newNode.next = head;
             return;
         }
         Node tmp = head;
-        while (tmp.next != null) {
+        while (tmp.next != head) {
             tmp = tmp.next;
         }
         tmp.next = newNode;
+        newNode.next = head;
     }
 
     public boolean deleteNode(Node target) {
@@ -109,7 +98,7 @@ public class MyLinkedList {
     }
 
     public static void main(String[] args) {
-        MyLinkedList linkedList = new MyLinkedList();
+        Singly linkedList = new Singly();
         linkedList.addNode(1);
         linkedList.addNode(3);
         linkedList.addNode(4);
