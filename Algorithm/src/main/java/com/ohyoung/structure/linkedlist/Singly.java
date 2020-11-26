@@ -50,12 +50,39 @@ public class Singly {
         tmp.next = newNode;
     }
 
+    public void addNode(int index, int data) {
+        Node newNode = new Node(data);
+        if (index < 0 || index > length()) {
+            System.err.println("addNode: illegal index");
+            return;
+        }
+        if (index == 0) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+        Node tmp = head;
+        int count = 0;
+        while (count != index) {
+            tmp = tmp.next;
+            count++;
+        }
+        // 找到tmp的前驱节点
+        Node pre = head;
+        while (pre.next != tmp) {
+            pre = pre.next;
+        }
+        newNode.next = tmp;
+        pre.next = newNode;
+    }
+
     public boolean deleteNode(Node target) {
         if (head == null) {
+            System.err.println("empty linked list");
             return false;
         }
         if (head == target) {
-            head = null;
+            head = head.next;
             return true;
         }
         Node tmp = head;
@@ -65,23 +92,37 @@ public class Singly {
             }
             tmp = tmp.next;
         }
-        tmp.next = tmp.next.next;
+        // 找到tmp的前驱节点
+        Node pre = head;
+        while (pre != tmp) {
+            pre = pre.next;
+        }
+        target.next = tmp;
+        pre.next = target;
         return true;
     }
 
     public boolean deleteNode(int index) {
-        if (index < 1 && index > length()) {
+        if (index < 0 || index >= length()) {
+            System.err.println("deleteNode: illegal index");
             // 抛异常
             return false;
         }
-        if (head == null) {
-            return false;
+        // 只存在一个节点的情况
+        if (index == 0 && length() == 1) {
+            head = null;
+            return true;
         }
         int sum = 0;
         Node tmp = head;
         while (sum != index) {
             tmp = tmp.next;
             sum++;
+        }
+        // 如果是头节点则没有前驱节点
+        if (tmp == head) {
+            head = head.next;
+            return true;
         }
         // 找到tmp的前驱节点
         Node pre = head;
@@ -94,11 +135,8 @@ public class Singly {
 
     public int length() {
         int length = 0;
-        if (head == null) {
-            return length;
-        }
         Node tmp = head;
-        while (tmp.next != null) {
+        while (tmp != null) {
             length++;
             tmp = tmp.next;
         }
@@ -111,18 +149,6 @@ public class Singly {
             System.out.println(tmp.data);
             tmp = tmp.next;
         }
-    }
-
-    public static void main(String[] args) {
-        Singly linkedList = new Singly();
-        linkedList.addNode(1);
-        linkedList.addNode(3);
-        linkedList.addNode(4);
-        linkedList.addNode(5);
-        linkedList.addNode(7);
-        linkedList.print();
-        System.out.println(linkedList.deleteNode(2));
-        linkedList.print();
     }
 
 }

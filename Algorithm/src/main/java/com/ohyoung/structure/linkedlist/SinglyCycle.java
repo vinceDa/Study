@@ -38,11 +38,11 @@ public class SinglyCycle {
         if (head == null) {
             return false;
         }
+        Node tmp = head;
         if (head == target) {
-            head = null;
+            head = head.next;
             return true;
         }
-        Node tmp = head;
         while (tmp.next != target) {
             if (tmp.next == null) {
                 return false;
@@ -95,18 +95,6 @@ public class SinglyCycle {
             System.out.println(tmp.data);
             tmp = tmp.next;
         }
-    }
-
-    public static void main(String[] args) {
-        Singly linkedList = new Singly();
-        linkedList.addNode(1);
-        linkedList.addNode(3);
-        linkedList.addNode(4);
-        linkedList.addNode(5);
-        linkedList.addNode(7);
-        linkedList.print();
-        System.out.println(linkedList.deleteNode(2));
-        linkedList.print();
     }
 
 }
