@@ -9,32 +9,52 @@ package com.ohyoung.structure.linkedlist;
 public class Singly {
 
     /**
-     *  单链表反转
-     *  链表中环的检测
-     *  两个有序的链表合并
-     *  删除链表倒数第 n 个结点
-     *  求链表的中间结点
-     */
-
-    /**
-     *  如果链表为空时，代码是否能正常工作？
-     *  如果链表只包含一个结点时，代码是否能正常工作？
-     *  如果链表只包含两个结点时，代码是否能正常工作？
-     *  代码逻辑在处理头结点和尾结点的时候，是否能正常工作？
-     */
-
-    /**
      *  头节点
      */
     Node head = null;
 
-    class Node {
+    public class Node {
         Node next = null;
         int data;
 
         public Node(int data) {
             this.data = data;
         }
+
+    }
+
+    /**
+     *  根据下标获取节点
+     */
+    public Node get(int targetIndex) {
+        assert (targetIndex >= 0 && targetIndex < length()) : "[query(int index)] illegal index: " + targetIndex;
+        int index = 0;
+        Node tmp = head;
+        while (index != targetIndex) {
+            tmp = tmp.next;
+            ++index;
+        }
+        return tmp;
+    }
+
+    /**
+     *  根据节点查找其下标
+     */
+    public int get(Node node) {
+        assert node != null : "[get(Node node)] illegal node";
+        if (head == null) {
+            return -1;
+        }
+        int index = 0;
+        Node tmp = head;
+        while (tmp.data != node.data) {
+            if (tmp.next == null) {
+                return -1;
+            }
+            tmp = tmp.next;
+            ++index;
+        }
+        return index;
     }
 
     public void addNode(int data) {
@@ -52,8 +72,9 @@ public class Singly {
 
     public void addNode(int index, int data) {
         Node newNode = new Node(data);
-        if (index < 0 || index > length()) {
-            System.err.println("addNode: illegal index");
+        int length = length();
+        if (index == length) {
+            addNode(data);
             return;
         }
         if (index == 0) {
@@ -61,6 +82,8 @@ public class Singly {
             head = newNode;
             return;
         }
+        assert (index > 0 && index < length) : "addNode with illegal index: " + index;
+
         Node tmp = head;
         int count = 0;
         while (count != index) {
@@ -69,7 +92,7 @@ public class Singly {
         }
         // 找到tmp的前驱节点
         Node pre = head;
-        while (pre.next != tmp) {
+        while (tmp != pre) {
             pre = pre.next;
         }
         newNode.next = tmp;
@@ -77,16 +100,13 @@ public class Singly {
     }
 
     public boolean deleteNode(Node target) {
-        if (head == null) {
-            System.err.println("empty linked list");
-            return false;
-        }
+        assert head != null : "empty linked list";
         if (head == target) {
             head = head.next;
             return true;
         }
         Node tmp = head;
-        while (tmp.next != target) {
+        while (tmp.data != target.data) {
             if (tmp.next == null) {
                 return false;
             }
@@ -94,25 +114,15 @@ public class Singly {
         }
         // 找到tmp的前驱节点
         Node pre = head;
-        while (pre != tmp) {
+        while (pre.next != tmp) {
             pre = pre.next;
         }
-        target.next = tmp;
-        pre.next = target;
+        pre.next = pre.next.next;
         return true;
     }
 
     public boolean deleteNode(int index) {
-        if (index < 0 || index >= length()) {
-            System.err.println("deleteNode: illegal index");
-            // 抛异常
-            return false;
-        }
-        // 只存在一个节点的情况
-        if (index == 0 && length() == 1) {
-            head = null;
-            return true;
-        }
+        assert (index >= 0 && index < length()) : "deleteNode with illegal index: " + index;
         int sum = 0;
         Node tmp = head;
         while (sum != index) {
@@ -149,6 +159,10 @@ public class Singly {
             System.out.println(tmp.data);
             tmp = tmp.next;
         }
+    }
+
+    public Node createNode(int data) {
+        return new Node(data);
     }
 
 }

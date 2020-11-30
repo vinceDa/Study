@@ -17,6 +17,40 @@ public class Doubly {
         public Node(int data) {
             this.data = data;
         }
+
+    }
+
+
+    /**
+     *  根据下标获取节点
+     */
+    public Node get(int targetIndex) {
+        assert (targetIndex >= 0 && targetIndex < length()) : "[query(int index)] illegal index: " + targetIndex;
+        int index = 0;
+        Node tmp = head;
+        while (index != targetIndex) {
+            tmp = tmp.next;
+            ++index;
+        }
+        return tmp;
+    }
+
+    /**
+     *  根据节点查找其下标
+     */
+    public int get(Node node) {
+        assert head != null : "empty linked list";
+        assert node != null : "[get(Node node)] illegal node";
+        int index = 0;
+        Node tmp = head;
+        while (tmp.data != node.data) {
+            if (tmp.next == null) {
+                return -1;
+            }
+            tmp = tmp.next;
+            ++index;
+        }
+        return index;
     }
 
     public void addNode(int data) {
@@ -34,53 +68,52 @@ public class Doubly {
     }
 
     public void addNode(int index, int data) {
-        Node newNode = new Node(data);
-        if (index < 0 || index >= length()) {
-            System.err.println("addNode: illegal index");
+        if (index == length()) {
+            addNode(data);
             return;
         }
+        Node newNode = new Node(data);
+        if (index == 0) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+        assert (index > 0 && index < length()) : "addNode illegal index: " + index;
         Node tmp = head;
         int count = 0;
         while (count != index) {
             tmp = tmp.next;
             count++;
         }
-        // 找到tmp的前驱节点
-        Node pre = head;
-        while (pre.next != tmp) {
-            pre = pre.next;
-        }
         newNode.next = tmp;
-        pre.next = newNode;
+        newNode.pre = tmp.pre;
+        tmp.pre = newNode;
+        tmp.pre.next = newNode;
     }
 
     public boolean deleteNode(Node target) {
-        if (head == null) {
-            System.err.println("empty linked list");
-            return false;
-        }
+        assert head != null : "empty linked list";
+
         if (head == target) {
             head = head.next;
             head.pre = null;
             return true;
         }
         Node tmp = head;
-        while (tmp.next != target) {
+        while (tmp.data != target.data) {
             if (tmp.next == null) {
                 return false;
             }
             tmp = tmp.next;
         }
-        tmp.next = tmp.next.next;
+        tmp.pre.next = tmp.next;
+        tmp.next.pre = tmp.pre;
         return true;
     }
 
     public boolean deleteNode(int index) {
-        if (index < 0 || index >= length()) {
-            System.err.println("deleteNode: illegal index");
-            // 抛异常
-            return false;
-        }
+        assert (index >= 0 && index < length()) : "deleteNode illegal index: " + index;
+
         // 只存在一个节点的情况
         if (index == 0 && length() == 1) {
             head = null;
@@ -99,6 +132,7 @@ public class Doubly {
             return true;
         }
         tmp.pre.next = tmp.next;
+        tmp.next.pre = tmp.pre;
         return true;
     }
 
@@ -120,13 +154,8 @@ public class Doubly {
         }
     }
 
-    public static void main(String[] args) {
-        Doubly linkedList = new Doubly();
-        linkedList.addNode(1);
-        linkedList.addNode(3);
-        linkedList.print();
-        System.out.println(linkedList.deleteNode(1));
-        linkedList.print();
+    public Node createNode(int data) {
+        return new Node(data);
     }
 
 }
