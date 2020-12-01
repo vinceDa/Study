@@ -8,12 +8,12 @@ import java.util.Arrays;
  * @author ohYoung
  * @date 2020/11/5 15:56
  */
-public class InsertSort {
+public class InsertionSort {
 
     public static void main(String[] args) {
-        String [] a = new String[]{"r","a","s","b","e","d","f"};
-        // sort(a);
-        sortWithSentinel(a);
+        String [] a = new String[]{"a","s","s","b"};
+        sort(a);
+        // sortWithSentinel(a);
         System.out.println(Arrays.toString(a));
     }
 
@@ -25,6 +25,8 @@ public class InsertSort {
     private static void sort(Comparable[] a) {
         // i可以看作是索引
         for (int i = 0; i < a.length; i++) {
+
+            // TODO 这里有个问题, 如果类似 a,s,s,b 的时候, 这里执行的是 a,s,b,s --> a,b,s,s; 多出了一次插入操作, 如果能直接插入到第一个相同元素(s,s)的前面更好
             for (int j = i; j > 0 && CompareUtil.less(a[j], a[j-1]); j--) {
                 CompareUtil.exchange(a, j, j-1);
             }

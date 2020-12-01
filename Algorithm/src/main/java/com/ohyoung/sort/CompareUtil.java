@@ -16,12 +16,6 @@ public class CompareUtil {
         a[j] = t;
     }
 
-    public static void exchange(Comparable a, Comparable b) {
-        Comparable t = a;
-        a = b;
-        b = t;
-    }
-
     public static boolean isSorted(Comparable[] a) { // 测试数组元素是否有序
         for (int i = 1; i < a.length; i++) {
             if (less(a[i], a[i - 1])) {
