@@ -1,5 +1,7 @@
 package com.ohyoung.structure.linkedlist;
 
+import java.util.Arrays;
+
 /**
  *  实现一个单项链表
  *
@@ -26,7 +28,7 @@ public class Singly {
     /**
      *  根据下标获取节点
      */
-    public Node get(int targetIndex) {
+    public Node getByIndex(int targetIndex) {
         assert (targetIndex >= 0 && targetIndex < length()) : "[query(int index)] illegal index: " + targetIndex;
         int index = 0;
         Node tmp = head;
@@ -40,11 +42,11 @@ public class Singly {
     /**
      *  根据节点查找其下标
      */
-    public int get(Node node) {
-        assert node != null : "[get(Node node)] illegal node";
+    public int getByValue(int value) {
         if (head == null) {
             return -1;
         }
+        Node node = new Node(value);
         int index = 0;
         Node tmp = head;
         while (tmp.data != node.data) {
@@ -57,8 +59,26 @@ public class Singly {
         return index;
     }
 
-    public void addNode(int data) {
+    public void insertHead(int data) {
         Node newNode = new Node(data);
+        this.insertHead(newNode);
+    }
+
+    public void insertHead(Node newNode) {
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        newNode.next = head;
+        head = newNode;
+    }
+
+    public void insertTail(int data) {
+        Node newNode = new Node(data);
+        this.insertTail(newNode);
+    }
+
+    public void insertTail(Node newNode) {
         if (head == null) {
             head = newNode;
             return;
@@ -70,77 +90,77 @@ public class Singly {
         tmp.next = newNode;
     }
 
-    public void addNode(int index, int data) {
+    public void insertAfter(Node after, int data) {
+        if (after == null) {
+            return ;
+        }
         Node newNode = new Node(data);
-        int length = length();
-        if (index == length) {
-            addNode(data);
-            return;
-        }
-        if (index == 0) {
-            newNode.next = head;
-            head = newNode;
-            return;
-        }
-        assert (index > 0 && index < length) : "addNode with illegal index: " + index;
-
-        Node tmp = head;
-        int count = 0;
-        while (count != index) {
-            tmp = tmp.next;
-            count++;
-        }
-        // 找到tmp的前驱节点
-        Node pre = head;
-        while (tmp != pre) {
-            pre = pre.next;
-        }
-        newNode.next = tmp;
-        pre.next = newNode;
+        newNode.next = after.next;
+        after.next = newNode;
     }
 
-    public boolean deleteNode(Node target) {
-        assert head != null : "empty linked list";
+    public void insertBefore(Node before, int data) {
+        if (before == null) {
+            return ;
+        }
+        Node newNode = new Node(data);
+        if (head == before) {
+            this.insertHead(newNode);
+            return;
+        }
+        Node tmp = head;
+        while (tmp != null && tmp.next != before) {
+            tmp = tmp.next;
+        }
+        if (tmp == null) {
+            return;
+        }
+        newNode.next = before;
+        tmp.next = newNode;
+
+    }
+
+
+    public void deleteByNode(Node target) {
+        if (head == null || target == null) {
+            return ;
+        }
         if (head == target) {
             head = head.next;
-            return true;
+            return ;
         }
-        Node tmp = head;
-        while (tmp.data != target.data) {
-            if (tmp.next == null) {
-                return false;
-            }
-            tmp = tmp.next;
-        }
-        // 找到tmp的前驱节点
+        // 找到target的前驱节点
         Node pre = head;
-        while (pre.next != tmp) {
+        while (pre != null && pre.next != target) {
             pre = pre.next;
         }
+        if (pre == null) {
+            return;
+        }
         pre.next = pre.next.next;
-        return true;
     }
 
-    public boolean deleteNode(int index) {
-        assert (index >= 0 && index < length()) : "deleteNode with illegal index: " + index;
-        int sum = 0;
+    public void deleteByValue(int value) {
         Node tmp = head;
-        while (sum != index) {
+        while (tmp != null && tmp.next.data != value) {
             tmp = tmp.next;
-            sum++;
         }
-        // 如果是头节点则没有前驱节点
+        if (tmp == null) {
+            return ;
+        }
         if (tmp == head) {
             head = head.next;
-            return true;
+            return;
         }
         // 找到tmp的前驱节点
         Node pre = head;
-        while (pre.next != tmp) {
+        while (pre != null && pre.next != tmp) {
             pre = pre.next;
         }
+        if (pre == null) {
+            return;
+        }
         pre.next = pre.next.next;
-        return true;
     }
 
     public int length() {
@@ -156,13 +176,51 @@ public class Singly {
     public void print() {
         Node tmp = head;
         while (tmp != null) {
-            System.out.println(tmp.data);
+            System.out.print(tmp.data + " ");
             tmp = tmp.next;
         }
+        System.out.println();
     }
 
     public Node createNode(int data) {
         return new Node(data);
+    }
+
+    /**
+     *  单链表反转, 推荐
+     */
+    public void reverse() {
+        if (head == null || head.next == null) {
+            return;
+        }
+        Node pre = null;
+        while (head != null) {
+            Node next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+        head = pre;
+    }
+
+    /**
+     *  单链表反转, 数组实现, 空间复杂度为O(n)
+     */
+    public void reverseByArray() {
+        Node[] nodes = new Node[length()];
+        int index = 0;
+        Node tmp = head;
+        while (tmp != null) {
+            nodes[index++] = tmp;
+            tmp = tmp.next;
+        }
+        int endIndex = nodes.length - 1;
+        for (int i = endIndex; i > 0; i--) {
+            Node node = nodes[i];
+            node.next = nodes[i - 1];
+        }
+        nodes[0].next = null;
+        head = nodes[endIndex];
     }
 
 }

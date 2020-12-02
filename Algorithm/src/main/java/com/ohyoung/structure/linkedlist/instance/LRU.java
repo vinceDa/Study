@@ -21,19 +21,19 @@ public class LRU {
 
     public void addData(int data) {
         // 1. 如果数据在链表中存在, 将数据删除然后在链表头部插入
-        int i = singly.get(singly.createNode(data));
+        int i = singly.getByValue(data);
         if (i != -1) {
-            singly.deleteNode(i);
-            singly.addNode(0, data);
+            singly.deleteByValue(i);
+            singly.insertHead(data);
             return;
         }
         // 2. 如果数据在链表中不存在
         if (singly.length() >= length) {
             // 2.2. 如果链表满了, 则删除尾节点然后从头部插入最新数据
-            singly.deleteNode(singly.length() - 1);
+            singly.deleteByValue(singly.length() - 1);
         }
         // 2.1 如果链表未满, 则从头部插入数据
-        singly.addNode(0, data);
+        singly.insertHead(data);
     }
 
     public void print() {
