@@ -191,7 +191,7 @@ public class Singly {
      */
     public void reverse() {
         if (head == null || head.next == null) {
-            return;
+            return ;
         }
         Node pre = null;
         while (head != null) {
@@ -201,6 +201,97 @@ public class Singly {
             head = next;
         }
         head = pre;
+    }
+
+    /**
+     *  带节点的单链表反转, 推荐
+     */
+    public Node reverseWithNode(Node node) {
+        if (node == null || node.next == null) {
+            return null;
+        }
+        Node pre = null;
+        while (node != null) {
+            Node next = node.next;
+            node.next = pre;
+            pre = node;
+            node = next;
+        }
+        return pre;
+    }
+
+    /**
+     *  判断是否为回文
+     */
+    public boolean isPalindrome() {
+        Node midNode = getMidNode();
+        Node left = head;
+        Node right = reverseWithNode(midNode);
+        while (right != null) {
+            if (left.data != right.data) {
+                return false;
+            }
+            left = left.next;
+            right = right.next;
+        }
+        return true;
+    }
+
+    /**
+     * 判断链表是否为环
+     *  定义快慢两个指针, fast每次走2步, slow每次走1步
+     *  1. 如果fast落后slow 1步, 那么下一步fast正好追上slow
+     *  2. 如果fast落后slow 2步, 那么下一步fast将落后slow 1步, 属于情况1, 所以fast必定会和slow相遇
+     *  因为fast=2 * slow, 所以相遇的时候slow正好绕了1圈(如果取非2倍的速度, 也会相遇但是slow可能会多绕几圈)
+     */
+    public boolean isLoop() {
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *  删除倒数第N个节点
+     */
+    public void deleteReciprocalNode(int n) {
+        Node slow = head;
+        Node right = head;
+        for (int i = 0; i <= n; i++) {
+            if (right != null) {
+                right = right.next;
+            } else {
+                // n超出了链表长度
+                return;
+            }
+        }
+        while (right != null) {
+            right = right.next;
+            slow = slow.next;
+        }
+        if (slow != null) {
+            slow.next = slow.next.next;
+        }
+    }
+
+    private Node getMidNode() {
+        Node fast = head;
+        Node slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        // 链表为奇数
+        if (fast != null) {
+            slow = slow.next;
+        }
+        return slow;
     }
 
     /**

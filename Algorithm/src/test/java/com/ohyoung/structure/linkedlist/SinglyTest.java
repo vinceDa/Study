@@ -73,4 +73,99 @@ public class SinglyTest {
         singly.print();
     }
 
+    /**
+     * 判断是否回文
+     */
+    @Test
+    public void isPalindrome() {
+        Singly singly = new Singly();
+        singly.insertTail(1);
+        singly.insertTail(2);
+        singly.insertTail(3);
+        singly.insertTail(2);
+        singly.insertTail(1);
+        // singly.insertTail(6);
+        System.out.println(singly.isPalindrome());
+    }
+
+    /**
+     * 删除倒数第N个节点
+     */
+    @Test
+    public void deleteReciprocalNode() {
+        Singly singly = new Singly();
+        singly.insertTail(1);
+        singly.insertTail(2);
+        singly.insertTail(3);
+        singly.insertTail(2);
+        singly.insertTail(1);
+        singly.insertTail(1);
+        singly.print();
+        singly.deleteReciprocalNode(1);
+        singly.print();
+    }
+
+    /**
+     * 判断链表是否回环
+     */
+    @Test
+    public void isLoop() {
+        Singly singly = new Singly();
+        singly.insertTail(1);
+        singly.insertTail(2);
+        singly.insertTail(3);
+        singly.insertTail(2);
+        singly.insertTail(1);
+        singly.insertTail(1);
+        Singly.Node node = singly.createNode(100);
+        singly.insertTail(node);
+        node.next = singly.head;
+        System.out.println(singly.isLoop());
+    }
+
+    /**
+     * 合并两个有序链表
+     */
+    @Test
+    public void mergeOrderlyLinked() {
+        Singly singly = new Singly();
+        singly.insertTail(1);
+        singly.insertTail(2);
+        singly.insertTail(3);
+        singly.insertTail(5);
+        singly.insertTail(7);
+        singly.insertTail(8);
+        Singly another = new Singly();
+        another.insertTail(2);
+        another.insertTail(4);
+        another.insertTail(5);
+        another.insertTail(6);
+        another.insertTail(8);
+        another.insertTail(9);
+        another.insertTail(10);
+        Singly.Node s = singly.head;
+        Singly.Node a = another.head;
+        Singly other = new Singly();
+        while (s != null && a != null) {
+            if (s.data <= a.data) {
+                Singly.Node tmp = s;
+                s = s.next;
+                tmp.next = null;
+                other.insertTail(tmp);
+            } else {
+                Singly.Node tmp = a;
+                a = a.next;
+                tmp.next = null;
+                other.insertTail(tmp);
+            }
+        }
+        if (s != null) {
+            other.insertTail(s);
+        }
+        if (a != null) {
+            other.insertTail(a);
+        }
+        other.print();
+    }
+
 }
