@@ -54,4 +54,11 @@ public class ArrayQueue {
         ++head;
         return item;
     }
+
+    public void print() {
+        for (int i = head; i < tail; i++) {
+            System.out.print(items[i] + " ");
+        }
+        System.out.println();
+    }
 }

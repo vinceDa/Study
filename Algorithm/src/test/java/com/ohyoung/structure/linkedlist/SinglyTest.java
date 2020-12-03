@@ -29,7 +29,7 @@ public class SinglyTest {
         singly.insertTail(1);
         singly.insertTail(2);
         singly.insertTail(3);
-        singly.print();
+        singly.printAll();
     }
 
 
@@ -38,18 +38,18 @@ public class SinglyTest {
         Singly singly = new Singly();
         singly.deleteByValue(1);
         singly.deleteByValue(2);
-        singly.print();
+        singly.printAll();
         singly.deleteByValue(2);
-        singly.print();
+        singly.printAll();
     }
 
     @Test
     public void deleteNodeWithIndex() {
         Singly singly = new Singly();
         singly.insertTail(1);
-        singly.print();
+        singly.printAll();
         singly.deleteByValue(0);
-        singly.print();
+        singly.printAll();
     }
 
     /**
@@ -68,9 +68,9 @@ public class SinglyTest {
         singly.insertTail(4);
         singly.insertTail(5);
         singly.insertTail(6);
-        singly.print();
+        singly.printAll();
         singly.reverse();
-        singly.print();
+        singly.printAll();
     }
 
     /**
@@ -100,9 +100,9 @@ public class SinglyTest {
         singly.insertTail(2);
         singly.insertTail(1);
         singly.insertTail(1);
-        singly.print();
+        singly.printAll();
         singly.deleteReciprocalNode(1);
-        singly.print();
+        singly.printAll();
     }
 
     /**
@@ -143,29 +143,8 @@ public class SinglyTest {
         another.insertTail(8);
         another.insertTail(9);
         another.insertTail(10);
-        Singly.Node s = singly.head;
-        Singly.Node a = another.head;
-        Singly other = new Singly();
-        while (s != null && a != null) {
-            if (s.data <= a.data) {
-                Singly.Node tmp = s;
-                s = s.next;
-                tmp.next = null;
-                other.insertTail(tmp);
-            } else {
-                Singly.Node tmp = a;
-                a = a.next;
-                tmp.next = null;
-                other.insertTail(tmp);
-            }
-        }
-        if (s != null) {
-            other.insertTail(s);
-        }
-        if (a != null) {
-            other.insertTail(a);
-        }
-        other.print();
+        Singly.Node node = singly.mergeOrderlyLinked(singly.head, another.head);
+        singly.print(node);
     }
 
 }

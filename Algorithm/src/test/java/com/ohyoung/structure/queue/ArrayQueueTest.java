@@ -9,7 +9,27 @@ import org.junit.Test;
 public class ArrayQueueTest {
 
     @Test
-    public void addData() {
+    public void enqueue() {
+        ArrayQueue queue = new ArrayQueue(10);
+        queue.enqueue("a");
+        queue.enqueue("b");
+        queue.enqueue("c");
+        queue.enqueue("d");
+        queue.enqueue("e");
+        queue.enqueue("f");
+        queue.enqueue("g");
+        queue.enqueue("h");
+        queue.enqueue("i");
+        queue.enqueue("j");
+        queue.enqueue("k");
+        queue.enqueue("l");
+        queue.enqueue("m");
+        queue.print();
+
+    }
+
+    @Test
+    public void dequeue() {
         ArrayQueue queue = new ArrayQueue(10);
         queue.enqueue("a");
         queue.enqueue("b");
@@ -26,18 +46,12 @@ public class ArrayQueueTest {
         queue.enqueue("m");
         queue.enqueue("n");
         queue.enqueue("o");
+        queue.print();
         System.out.println(queue.dequeue());
         System.out.println(queue.dequeue());
         System.out.println(queue.dequeue());
         System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        queue.enqueue("o");
-        System.out.println(queue.dequeue());
+        queue.print();
 
     }
 

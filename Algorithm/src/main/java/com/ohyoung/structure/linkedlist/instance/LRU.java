@@ -37,7 +37,7 @@ public class LRU {
     }
 
     public void print() {
-        singly.print();
+        singly.printAll();
     }
 
     public static void main(String[] args) {

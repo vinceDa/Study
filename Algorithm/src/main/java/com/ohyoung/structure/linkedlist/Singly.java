@@ -173,7 +173,15 @@ public class Singly {
         return length;
     }
 
-    public void print() {
+    public void print(Node node) {
+        while (node != null) {
+            System.out.print(node.data + " ");
+            node = node.next;
+        }
+        System.out.println();
+    }
+
+    public void printAll() {
         Node tmp = head;
         while (tmp != null) {
             System.out.print(tmp.data + " ");
@@ -255,6 +263,31 @@ public class Singly {
             }
         }
         return false;
+    }
+
+    /**
+     * 合并两个有序链表
+     */
+    public Node mergeOrderlyLinked(Node n1, Node n2) {
+        Node merge = new Node(0);
+        Node tmp = merge;
+        while (n1 != null && n2 != null) {
+            if (n1.data <= n2.data) {
+                merge.next = n1;
+                n1 = n1.next;
+            } else {
+                merge.next = n2;
+                n2 = n2.next;
+            }
+            merge = merge.next;
+        }
+        if (n1 != null) {
+            merge.next = n1;
+        }
+        if (n2 != null) {
+            merge.next = n2;
+        }
+        return tmp.next;
     }
 
     /**

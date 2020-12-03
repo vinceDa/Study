@@ -4,30 +4,31 @@ import org.junit.Test;
 
 /**
  * @author ohYoung
- * @date 2020/11/30 9:31
+ * @date 2020/12/3 16:52
  */
-public class ArrayStackTest {
+public class LinkedListStackTest {
 
     @Test
     public void push() {
-        ArrayStack stack = new ArrayStack(6);
+        LinkedListStack stack = new LinkedListStack();
         stack.push(1);
         stack.push(2);
         stack.push(3);
         stack.push(4);
         stack.push(5);
         stack.push(6);
-        System.out.println(stack.print());
+        stack.print();
     }
 
     @Test
     public void pop() {
-        ArrayStack stack = new ArrayStack(6);
+        LinkedListStack stack = new LinkedListStack();
         stack.push(1);
         stack.push(2);
         stack.push(3);
+        stack.print();
         System.out.println(stack.pop());
-        System.out.println(stack.print());
+        stack.print();
     }
 
 }
