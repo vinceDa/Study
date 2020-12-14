@@ -30,7 +30,7 @@ public class ArrayQueue {
             if (head == 0) {
                 return false;
             } else {
-                // 将队列剪切至头部
+                // 队列头部有空余部分, 将队列剪切至头部然后继续从尾部添加数据
                 for (int i = head; i < tail; i++) {
                     items[i - head] = items[i];
                 }

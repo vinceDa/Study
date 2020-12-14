@@ -23,23 +23,15 @@ public class ArrayCycleQueue {
 
     /**
      *  入队
+     *  当队列满时，tail 指向的位置实际上是没有存储数据的。所以，循环队列会浪费一个数组的存储空间
      */
     public boolean enqueue(String data) {
-        if (tail == n) {
-            // 队列满了
-            if (head == 0) {
-                return false;
-            } else {
-                // 将队列剪切至头部
-                for (int i = head; i < tail; i++) {
-                    items[i - head] = items[i];
-                }
-                tail = tail - head;
-                head = 0;
-            }
+        // 队列满了
+        if ((tail + 1) % n == head) {
+            return false;
         }
         items[tail] = data;
-        ++tail;
+        tail = (tail + 1) % n;
         return true;
     }
 
@@ -51,7 +43,20 @@ public class ArrayCycleQueue {
             return null;
         }
         String item = items[head];
-        ++head;
+        head = (head + 1) % n;
         return item;
+    }
+
+    public void print() {
+        int start = head;
+        int end = tail;
+        if (start > end) {
+            start = tail;
+            end = head;
+        }
+        for (int i = start; i < end; i++) {
+            System.out.print(items[i] + " ");
+        }
+        System.out.println();
     }
 }
