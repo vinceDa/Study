@@ -1,5 +1,7 @@
 package com.ohyoung;
 
+import java.math.BigDecimal;
+
 /**
  * @author ohYoung
  * @description 实现二分查找法
@@ -8,9 +10,10 @@ package com.ohyoung;
 public class BinarySearch {
 
     public static void main(String[] args) {
-        int[] a = new int[]{1, 2, 4};
+        /*int[] a = new int[]{1, 2, 4};
         System.out.println(binarySearchByCycle(a, 4));
-        System.out.println(binarySearchByRecursion(a, 4));
+        System.out.println(binarySearchByRecursion(a, 4));*/
+        System.out.println(getSquareRoot(3));
     }
 
     /**
@@ -68,13 +71,37 @@ public class BinarySearch {
     }
 
     /**
-     *  课后题: 如何编程实现"求一个数的平方根"? 要求精确到小数点后 6 位.
+     * 课后题: 如何编程实现"求一个数的平方根"? 要求精确到小数点后 6 位.
      */
-
+    private static float getSquareRoot(int num) {
+        BigDecimal mid = new BigDecimal(num / 2);
+        BigDecimal start = new BigDecimal(0);
+        BigDecimal end = new BigDecimal(num);
+        BigDecimal res = new BigDecimal(num);
+        while (start.compareTo(end) <= 0) {
+            if (mid.multiply(mid).compareTo(res) == 0) {
+                return mid.floatValue();
+            }
+            if (mid.multiply(mid).compareTo(res) > 0) {
+                end = mid;
+                mid = mid.add(start).divide(BigDecimal.valueOf(2));
+            } else if (mid.multiply(mid).compareTo(res) < 0) {
+                start = mid;
+                mid = mid.add(end).divide(BigDecimal.valueOf(2));
+            }
+            if (mid.scale() >= 6) {
+                return mid.floatValue();
+            }
+        }
+        return mid.floatValue();
+    }
 
     /**
      * 如果数据使用链表存储, 二分查找的时间复杂就会变得很高, 那查找的时间复杂度究竟是多少呢?
      * 如果你自己推导一下, 你就会深刻地认识到, 为何我们会选择用数组而不是链表来实现二分查找了.
+     *  推导:
+     *      每次找到中间位置都会遍历到指定位置然后获取值, 这时候的时间复杂度为n * logn
+     *
+     *
      */
-
 }
