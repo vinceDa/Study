@@ -1,4 +1,4 @@
-package com.ohyoung;
+package com.ohyoung.binarysearch;
 
 import java.math.BigDecimal;
 
