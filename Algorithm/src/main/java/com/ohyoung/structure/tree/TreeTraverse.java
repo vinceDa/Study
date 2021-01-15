@@ -1,7 +1,5 @@
 package com.ohyoung.structure.tree;
 
-import com.ohyoung.structure.linkedlist.Doubly;
-
 /**
  * @author ohYoung
  * @description 构建一颗二叉树并实现前、中、后序遍历
@@ -9,19 +7,32 @@ import com.ohyoung.structure.linkedlist.Doubly;
  **/
 public class TreeTraverse {
 
-    class Node {
+    public static void main(String[] args) {
+        TreeTraverse treeTraverse = new TreeTraverse();
+        Node head = treeTraverse.init();
+        preTraverse(head);
+        System.out.println();
+        midTraverse(head);
+        System.out.println();
+        afterTraverse(head);
+    }
+
+    static class Node {
         Node left;
         Node right;
         String data;
+
+        public Node() {
+        }
 
         public Node(String data) {
             this.data = data;
         }
     }
 
-    public void init(Node head) {
+    public Node init() {
         // 构建一棵二叉树
-        head = new Node("A");
+        Node head = new Node("A");
         Node node2 = new Node("B");
         Node node3 = new Node("C");
         Node node4 = new Node("D");
@@ -34,29 +45,41 @@ public class TreeTraverse {
         node2.right = node5;
         node3.left = node6;
         node3.right = node7;
+        return head;
     }
 
     /**
      * 前序遍历
      */
-    public void preTraverse(Node node) {
+    public static void preTraverse(Node node) {
         if (node == null) {
             return;
         }
-        System.out.println(node.data);
+        System.out.print(node.data);
         preTraverse(node.left);
+        preTraverse(node.right);
 
     }
     /**
      * 中序遍历
      */
-    public void midTraverse(Node node) {
-
+    public static  void midTraverse(Node node) {
+        if (node == null) {
+            return;
+        }
+        midTraverse(node.left);
+        System.out.print(node.data);
+        midTraverse(node.right);
     }
     /**
      * 后序遍历
      */
-    public void afterTraverse(Node node) {
-
+    public static void afterTraverse(Node node) {
+        if (node == null) {
+            return;
+        }
+        afterTraverse(node.left);
+        afterTraverse(node.right);
+        System.out.print(node.data);
     }
 }
