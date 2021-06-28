@@ -79,7 +79,7 @@ public class Calculator {
     }
 
     public static void main(String[] args) {
-        Object[] cal = new Object[]{1, "+", 2, "*", 3, "/", 2, "+", 2 , "*", 3};
+        Object[] cal = new Object[]{1, "+", 2, "-", 3, "/", 2, "+", 2 , "*", 3};
         cal(cal);
     }
 }
