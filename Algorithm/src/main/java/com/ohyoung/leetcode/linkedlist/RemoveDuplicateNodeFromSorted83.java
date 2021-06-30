@@ -7,7 +7,7 @@ package com.ohyoung.leetcode.linkedlist;
  * @author ohYoung
  * @date 2021/6/28 22:40
  */
-public class RemoveDuplicateNodeFromSortedLinkedList83 {
+public class RemoveDuplicateNodeFromSorted83 {
 
     public static void main(String[] args) {
         ListNode node = new ListNode(1);
@@ -31,20 +31,21 @@ public class RemoveDuplicateNodeFromSortedLinkedList83 {
         }
         // 设置一个校验节点
         ListNode current = head;
-        while (current.next != null) {
-            if (current.next.val == current.val) {
-                current.next = current.next.next;
+        while (head.next != null) {
+            if (head.next.val == head.val) {
+                head.next = head.next.next;
             } else {
-                current = current.next;
+                head = head.next;
             }
         }
-        return head;
+        return current;
     }
 
     /**
-     * 将元素存入hash表
+     * 递归删除
      */
-    private static ListNode removeDuplicateNodeByHash(ListNode head) {
+    // TODO
+    private static ListNode removeDuplicateNodeByRecursion(ListNode head) {
         return null;
     }
 
