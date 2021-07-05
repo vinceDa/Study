@@ -37,7 +37,7 @@ public class IdeaVerification {
     }
 
     @Test
-    private void cs() {
+    public void cs() {
         LinkedList<Integer> linkedList = new LinkedList<>();
         linkedList.getFirst();
 
@@ -45,7 +45,17 @@ public class IdeaVerification {
 
     @Test
     public void test() {
+        int a = 1;
+        int b = 2;
+        reverse(a, b);
+    }
 
+    private void reverse(int a, int b) {
+        int t = -1;
+        t = a;
+        a = b;
+        b = t;
+        System.out.println(a + "  " + b);
     }
 
     private void getPath(Custom custom, String path) {

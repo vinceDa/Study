@@ -21,9 +21,9 @@ public class Reverse206 {
     }
 
     /**
-     *
+     *  链表反转，类似于引入第三个变量将a，b颠倒，不同的是需要注意代码顺序，不然可能会导致死循环
      */
-    private static ListNode reverse(ListNode head) {
+    public static ListNode  reverse(ListNode head) {
         if (head == null) {
             return null;
         }
@@ -47,11 +47,4 @@ public class Reverse206 {
         return null;
     }
 
-    private static class ListNode {
-        int val;
-        ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-    }
 }
