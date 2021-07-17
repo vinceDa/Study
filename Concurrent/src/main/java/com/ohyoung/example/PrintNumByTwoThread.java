@@ -21,7 +21,6 @@ public class PrintNumByTwoThread implements Runnable {
 
     @Override
     public void run() {
-        HashSet
         while (true) {
             synchronized (s1) {
                 Thread thread = Thread.currentThread();

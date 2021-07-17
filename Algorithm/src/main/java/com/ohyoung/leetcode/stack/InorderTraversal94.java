@@ -10,10 +10,18 @@ import java.util.List;
  */
 public class InorderTraversal94 {
 
+    public static void main(String[] args) {
+        TreeNode head = new TreeNode(1);
+        head.right = new TreeNode(2);
+        head.right.left = new TreeNode(3);
+        List<Integer> integers = inorderTraversal(head);
+        for (Integer integer : integers) {
+            System.out.println(integer);
+        }
+    }
 
 
-
-    public List<Integer> inorderTraversal(TreeNode root) {
+    public static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         TreeNode predecessor = null;
         while (root != null) {
@@ -25,18 +33,23 @@ public class InorderTraversal94 {
                 if (predecessor.right == null) {
                     predecessor.right = root;
                     root = root.left;
+                } else {
+                    // 说明左子树已经访问完了
+                    res.add(root.val);
+                    predecessor.right = null;
+                    root = root.right;
                 }
             } else {
                 // 当前节点为最左节点，直接加入数组
                 res.add(root.val);
-
+                root = root.right;
             }
         }
         return res;
     }
 
 
-  public class TreeNode {
+  public static class TreeNode {
       int val;
       TreeNode left;
       TreeNode right;
