@@ -41,13 +41,15 @@ public class BoyerMoore {
         int i = 0;
         while (i <= n - m) {
             int j;
+            // 模式串从后往前匹配
             for (j = m - 1; j >= 0; --j) {
+                // 坏字符对应模式串中的下标是j
                 if (a[i + j] != b[j]) {
                     break;
                 }
             }
-            // 匹配成功
             if (j < 0) {
+                // 匹配成功，返回主串与模式串第一个匹配的字符的位置
                 return i;
             }
             // 这里等同于将模式串向后滑动j-bc[a[i + j]]位
