@@ -1,27 +1,35 @@
 package com.ohyoung.match;
 
 /**
- * BM算法
+ * BM算法：根据自己的理解实现一边
  * @author vince
  */
-public class BoyerMoore {
+public class MyBMPractice {
+
+    public static void main(String[] args) {
+        MyBMPractice practice = new MyBMPractice();
+        char[] a = new char[]{'a', 'b', 'd', 'c', 'a'};
+        char[] b = new char[]{'d', 'c', 'a'};
+        System.out.println(practice.bm(a, 5, b, 3));
+    }
 
     private static final int SIZE = 256;
 
     /**
-     * 将模式串的每个字符存在散列表中
+     * 记录模式串的每个字符在模式串中所处的位置
      * @param b 模式串
      * @param m 模式串的长度
      * @param bc 散列表
      */
     private void generateBC(char[] b, int m, int[] bc) {
-        // 初始化散列表
+        // 初始化bc数组
         for (int i = 0; i < SIZE; i++) {
             bc[i] = -1;
         }
-        // 计算模式串每个字符的ascii码, 以ascii码为下标, 字符在模式串中的位置为值
+        // 以每个字符的ascii码为key, 在模式串中的位置为值存储
         for (int i = 0; i < m; i++) {
             int ascii = b[i];
+            // 如果存在相同字符, 总是用靠后的字符覆盖之前的, 保证移动位数不会过多, 避免错过可匹配的情况
             bc[ascii] = i;
         }
     }
@@ -65,33 +73,26 @@ public class BoyerMoore {
      * @return 第一次匹配上的位置
      */
     public int bm(char[] a, int n, char[] b, int m) {
-        // 初始化模式串
+        // 存储模式串中每个字符的位置
         int[] bc = new int[SIZE];
         generateBC(b, m, bc);
-        int[] suffix = new int[m];
-        boolean[] prefix = new boolean[m];
-        generateGS(b, m, suffix, prefix);
-        // 模式串与主串匹配的下标
+        // 循环比对, 直到i + m = n
         int i = 0;
         while (i <= n - m) {
+            // 模式串倒序匹配
             int j;
-            for (j =  m -1; j >= 0; j--) {
-                if (a[i + j] != a[j]) {
+            for (j = m - 1; j >= 0; j--) {
+                // 坏字符在模式串中的位置为j
+                if (a[i + j] != b[j]) {
                     break;
                 }
+
             }
-            // 匹配成功(返回主串与模式串第一个匹配的字符的位置)
+            // 匹配成功, 返回主串中和模式串相匹配的第一个字符的下标
             if (j < 0) {
                 return i;
             }
-            // 移动si - xi的位置(这里等同于将模式串往后滑动j-bc[(int)a[i+j]]位)
-            int x = j - bc[a[i + j]];
-            int y = 0;
-            // 如果有好后缀
-            if (j < m - 1) {
-                y = moveByGS(j, m, suffix, prefix);
-            }
-            i = i + Math.max(x, y);
+            i = i + j - bc[a[i + j]];
         }
         return -1;
     }
