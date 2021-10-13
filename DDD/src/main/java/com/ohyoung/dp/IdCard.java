@@ -1,6 +1,5 @@
 package com.ohyoung.dp;
 
-import cn.hutool.core.lang.Validator;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.IdcardUtil;
 

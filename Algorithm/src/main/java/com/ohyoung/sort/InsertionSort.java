@@ -3,8 +3,8 @@ package com.ohyoung.sort;
 import java.util.Arrays;
 
 /**
- * ��������
- *  Ϊ��Ҫ�������Ԫ���ṩ�ռ�, ����Ԫ���ٲ���֮ǰ�������һλ���㷨������������
+ * 插入排序
+ *  为了要给插入的元素提供空间, 其他元素再插入之前都向后移一位的算法叫做插入排序
  * @author ohYoung
  * @date 2020/11/5 15:56
  */
@@ -19,13 +19,13 @@ public class InsertionSort {
 
 
     /**
-     *  Ŀ��Ԫ�غ���ߵ�Ԫ�رȶ������Կ�������+1, ��������Ԫ�ض����ź����, �������ߵ�������Ҷ�ʱ, �������
-     * @param a ��Ҫ�����������
+     *  目标元素和左边的元素比对完后可以看作索引+1, 索引左侧的元素都是排好序的, 当索引走到数组的右端时, 排序结束
+     * @param a 将要被排序的数组
      */
     private static void sort(Comparable[] a) {
-        // i���Կ���������
+        // i可以看作是索引
         for (int i = 0; i < a.length; i++) {
-            // TODO �����и�����, ������� a,s,s,b ��ʱ��, ����ִ�е��� a,s,b,s --> a,b,s,s; �����һ�β������, �����ֱ�Ӳ��뵽��һ����ͬԪ��(s,s)��ǰ�����
+            // TODO 这里有个问题, 如果类似 a,s,s,b 的时候, 这里执行的是 a,s,b,s --> a,b,s,s; 多出了一次插入操作, 如果能直接插入到第一个相同元素(s,s)的前面更好
             for (int j = i; j > 0 && CompareUtil.less(a[j], a[j-1]); j--) {
                 CompareUtil.exchange(a, j, j-1);
             }
@@ -33,12 +33,12 @@ public class InsertionSort {
     }
 
     /**
-     *  �����鳤�ȹ���ʱ, j>0���ж���Ҫ���ж��, �������ǿ����Ƚ���СԪ���ҳ������ҷ��������,
-     *  �������ǾͿ��Դ�1��ʼѭ�����鲢��ɾ��j>0���ж�, �����СԪ�ؾ�����������е��ڱ�
-     *  ���������ڱ�ģʽ
+     *  当数组长度过大时, j>0的判断需要进行多次, 所以我们可以先将最小元素找出来并且放在最左边,
+     *  这样我们就可以从1开始循环数组并且删除j>0的判断, 这个最小元素就是这个样例中的哨兵
+     *  插入排序哨兵模式
      */
     private static void sortWithSentinel(Comparable[] a) {
-        // �ҵ���������С��Ԫ�ز����ڵ�һλ
+        // 找到数组中最小的元素并放在第一位
         int min = 0;
         for (int i = 0; i < a.length; i++) {
             if (CompareUtil.less(a[i], a[min])) {

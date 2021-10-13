@@ -4,8 +4,8 @@ package com.ohyoung.sort;
 import java.util.Arrays;
 
 /**
- * Ï£¶ûÅÅÐò
- * Ï£¶ûÅÅÐòÊÇ°Ñ¼ÇÂ¼°´ÏÂ±êµÄÒ»¶¨ÔöÁ¿·Ö×é£¬¶ÔÃ¿×éÊ¹ÓÃÖ±½Ó²åÈëÅÅÐòËã·¨ÅÅÐò
+ * å¸Œå°”æŽ’åº
+ * å¸Œå°”æŽ’åºæ˜¯æŠŠè®°å½•æŒ‰ä¸‹æ ‡çš„ä¸€å®šå¢žé‡åˆ†ç»„ï¼Œå¯¹æ¯ç»„ä½¿ç”¨ç›´æŽ¥æ’å…¥æŽ’åºç®—æ³•æŽ’åº
  *
  * @author ohYoung
  * @date 2020/12/14 17:17
@@ -23,7 +23,7 @@ public class ShellSort {
     private static void sort(Comparable[] a) {
         int gap = a.length / 2;
         while (gap > 1) {
-            //´ÓµÚgap¸öÔªËØ£¬Öð¸ö¶ÔÆäËùÔÚ×é½øÐÐÖ±½Ó²åÈëÅÅÐò²Ù×÷
+            //ä»Žç¬¬gapä¸ªå…ƒç´ ï¼Œé€ä¸ªå¯¹å…¶æ‰€åœ¨ç»„è¿›è¡Œç›´æŽ¥æ’å…¥æŽ’åºæ“ä½œ
             for (int i = gap; i < a.length; i+=gap) {
                 int j = i;
                 Comparable temp = a[j];
@@ -32,7 +32,7 @@ public class ShellSort {
                         a[j] = a[j - gap];
                         j -= gap;
                     }
-                    // ÒÆ¶¯·¨ÕÒµ½ÅÅÐòºótempµÄÎ»ÖÃj
+                    // ç§»åŠ¨æ³•æ‰¾åˆ°æŽ’åºåŽtempçš„ä½ç½®j
                     a[j] = temp;
                 }
             }

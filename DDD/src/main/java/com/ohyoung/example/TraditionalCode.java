@@ -1,11 +1,8 @@
 package com.ohyoung.example;
 
-import cn.hutool.core.lang.PatternPool;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.CharUtil;
 import cn.hutool.core.util.IdcardUtil;
-import cn.hutool.core.util.ReUtil;
 import com.ohyoung.dp.Customer;
 
 import javax.xml.bind.ValidationException;
@@ -20,6 +17,9 @@ import java.util.Date;
  */
 public class TraditionalCode {
 
+    /**
+     * 更新用户的身份证号，同时根据身份证号自动填充生日、性别字段
+     */
     public void updateCustomerIdCard(String customerGUID, String idCard) throws ValidationException, ParseException {
         // 假如此处需要将参数的具体错误信息返回, 所有这样写的代码都需要改动
         if (CharSequenceUtil.isEmpty(customerGUID) || !Validator.isUUID(customerGUID)) {

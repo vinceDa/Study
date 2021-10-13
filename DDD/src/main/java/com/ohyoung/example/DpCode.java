@@ -4,7 +4,6 @@ import com.ohyoung.dp.CustomerGUID;
 import com.ohyoung.dp.DpCustomer;
 import com.ohyoung.dp.IdCard;
 
-import javax.xml.bind.ValidationException;
 import java.text.ParseException;
 
 /**
@@ -21,6 +20,4 @@ public class DpCode {
         customer.setBirthDay(idCard.getBirthDay());
         System.out.println("insert success: " + customer.toString());
     }
-
-
 }

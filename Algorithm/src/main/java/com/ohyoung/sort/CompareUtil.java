@@ -16,7 +16,7 @@ public class CompareUtil {
         a[j] = t;
     }
 
-    public static boolean isSorted(Comparable[] a) { // 测试数组元素是否有序
+    public static boolean isSorted(Comparable[] a) { // 娴嬭瘯鏁扮粍鍏冪礌鏄惁鏈夊簭
         for (int i = 1; i < a.length; i++) {
             if (less(a[i], a[i - 1])) {
                 return false;
