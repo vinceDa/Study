@@ -1,6 +1,6 @@
 package com.ohyoung.structure.queue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author ohYoung

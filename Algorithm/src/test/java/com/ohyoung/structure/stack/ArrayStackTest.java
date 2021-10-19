@@ -1,6 +1,6 @@
 package com.ohyoung.structure.stack;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author ohYoung

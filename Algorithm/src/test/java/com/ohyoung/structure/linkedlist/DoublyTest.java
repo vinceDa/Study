@@ -1,6 +1,7 @@
 package com.ohyoung.structure.linkedlist;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 /**
  *  双向链表测试用例
