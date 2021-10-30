@@ -1,8 +1,11 @@
 package com.ohyoung.structure;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author ohYoung
@@ -41,10 +44,22 @@ public class IdeaVerification {
     }
 
     @Test
+    public void custom() {
+        DateTime endTime = DateUtil.endOfDay(new Date());
+        System.out.println(endTime);
+    }
+
+    @Test
     public void test() {
-        int a = 1;
-        int b = 2;
-        reverse(a, b);
+        List<Integer> a = new ArrayList<>();
+        a.add(199);
+        a.add(3);
+        a.add(2);
+        a.add(198);
+        System.out.println(a.toString());
+        a = a.stream().sorted(Comparator.comparing(Integer::intValue).reversed()).collect(Collectors.toList());
+        System.out.println(a.toString());
+
     }
 
     private void reverse(int a, int b) {
