@@ -12,6 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * 接口清晰度
+ * 数据校验
+ * 业务代码的清晰度
+ * 可测试性
  * @author ohYoung
  * @date 2021/9/12 23:25
  */

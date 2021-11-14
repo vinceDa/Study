@@ -11,7 +11,7 @@ import javax.xml.bind.ValidationException;
  */
 public class CustomerGUID {
 
-    private String customerGUID;
+    private final String customerGUID;
 
     public CustomerGUID(String customerGUID) throws ValidationException {
         if (CharSequenceUtil.isEmpty(customerGUID) || !Validator.isUUID(customerGUID)) {
