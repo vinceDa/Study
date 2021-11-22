@@ -45,8 +45,7 @@ public class IdeaVerification {
 
     @Test
     public void custom() {
-        DateTime endTime = DateUtil.endOfDay(new Date());
-        System.out.println(endTime);
+        System.out.println(0.1 + 0.2 == 0.3);
     }
 
     @Test
