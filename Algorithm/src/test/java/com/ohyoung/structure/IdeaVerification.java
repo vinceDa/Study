@@ -50,15 +50,9 @@ public class IdeaVerification {
 
     @Test
     public void test() {
-        List<Integer> a = new ArrayList<>();
-        a.add(199);
-        a.add(3);
-        a.add(2);
-        a.add(198);
-        System.out.println(a.toString());
-        a = a.stream().sorted(Comparator.comparing(Integer::intValue).reversed()).collect(Collectors.toList());
-        System.out.println(a.toString());
-
+        List<UUID> a = new ArrayList<>();
+        a.add(null);
+        System.out.println(a.isEmpty());
     }
 
     private void reverse(int a, int b) {
