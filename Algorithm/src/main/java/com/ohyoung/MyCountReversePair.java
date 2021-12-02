@@ -48,15 +48,16 @@ public class MyCountReversePair {
             tmp[k++] = a[j++];
         }
         // 从tmp拷贝回a, 递归中每次tmp数组的位置都和left有关
-        for (int l = 0; l < right - left; l++) {
-            tmp[left + i] = a[l];
+        for (int l = 0; l <= right - left; l++) {
+            tmp[left + l] = a[l];
         }
     }
 
     public static void main(String[] args) {
         int[] a = new int[]{1, 3, 7, 5, 3, 9};
         MyCountReversePair example = new MyCountReversePair();
-        System.out.println(example.count(a));
+        int count = example.count(a);
+        System.out.println(count);
     }
 
 }
