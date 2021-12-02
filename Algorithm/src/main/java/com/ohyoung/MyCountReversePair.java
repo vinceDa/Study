@@ -35,7 +35,7 @@ public class MyCountReversePair {
             } else {
                 // 统计left到mid之间, 比a[j]大的元素个数(j位于mid到right间, 可以认为是另一个数组)
                 // 递归到这里的时候, 是从1个元素开始向上合并, 数组的元素都是有序的, 所以只要a[i]大于a[j], 那么i-mid间所有的元素都大于a[j]
-                num += (mid - left + i);
+                num += (mid - i + 1);
                 tmp[k++] = a[j++];
             }
         }
@@ -47,9 +47,9 @@ public class MyCountReversePair {
         while (j <= right) {
             tmp[k++] = a[j++];
         }
-        // 从tmp拷贝回a, 递归中每次tmp数组的位置都和left有关
-        for (int l = 0; l <= right - left; l++) {
-            tmp[left + l] = a[l];
+        // 从tmp拷贝回a, 递归中每次tmp数组的位置都和left有关(注意这里直接将i置为0而不是新定义一个0值, 不然会数组越界)
+        for (i = 0; i <= right-left; ++i) { // 从tmp拷贝回a
+            a[left+i] = tmp[i];
         }
     }
 
