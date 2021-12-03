@@ -1,7 +1,5 @@
 package org.example;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
@@ -9,8 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
-import java.util.stream.Collectors;
+
 
 /**
  * Unit test for simple App.
@@ -23,7 +20,7 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue()
     {
-        assertTrue( true );
+        assert ( true );
     }
 
     @Test
