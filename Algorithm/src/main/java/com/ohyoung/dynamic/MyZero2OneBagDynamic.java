@@ -1,4 +1,4 @@
-package com.ohyoung;
+package com.ohyoung.dynamic;
 
 /**
  * 0-1背包问题
