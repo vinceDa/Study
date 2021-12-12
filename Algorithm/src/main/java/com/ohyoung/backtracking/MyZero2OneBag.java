@@ -1,4 +1,4 @@
-package com.ohyoung;
+package com.ohyoung.backtracking;
 
 /**
  * 0-1背包问题

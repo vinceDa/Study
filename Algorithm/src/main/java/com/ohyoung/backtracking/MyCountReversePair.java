@@ -1,4 +1,4 @@
-package com.ohyoung;
+package com.ohyoung.backtracking;
 
 /**
  * 统计数组中的逆序对个数

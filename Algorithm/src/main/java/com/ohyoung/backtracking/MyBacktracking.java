@@ -1,4 +1,4 @@
-package com.ohyoung;
+package com.ohyoung.backtracking;
 
 /**
  * 回溯算法：八皇后
