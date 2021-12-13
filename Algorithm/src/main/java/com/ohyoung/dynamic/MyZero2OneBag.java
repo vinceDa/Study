@@ -9,7 +9,7 @@ package com.ohyoung.dynamic;
  * @author ohYoung
  * @date 2021/12/2 23:03
  */
-public class MyZero2OneBagDynamic {
+public class MyZero2OneBag {
 
     /**
      * 存储背包中物品总量的最大值
@@ -84,7 +84,7 @@ public class MyZero2OneBagDynamic {
     }
 
     public static void main(String[] args) {
-        MyZero2OneBagDynamic example = new MyZero2OneBagDynamic();
+        MyZero2OneBag example = new MyZero2OneBag();
         int[] items = new int[]{1, 4, 7};
         System.out.println(example.knapsack(items, items.length, 10));
     }

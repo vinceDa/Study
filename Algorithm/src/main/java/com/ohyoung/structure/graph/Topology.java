@@ -1,4 +1,4 @@
-package com.ohyoung.sort;
+package com.ohyoung.structure.graph;
 
 import java.util.LinkedList;
 
