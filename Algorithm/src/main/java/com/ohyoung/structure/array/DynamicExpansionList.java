@@ -48,7 +48,7 @@ public class DynamicExpansionList<E> {
     /**
      * 数组元素添加删除更新数组容量大小
      */
-    public void add(int i) {
+    public void add(E e) {
 
     }
 
@@ -56,12 +56,16 @@ public class DynamicExpansionList<E> {
      * 数组元素删除时更新数组容量大小
      */
     public void remove(int i) {
-        assert i < size && i >= 0;
         if (i >= size || i < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        element[i] = null;
-        size--;
+        // 将i后的元素向前移一位
+        int move = size - i - 1;
+        // 非末节点
+        if (move != 0) {
+            System.arraycopy(element, i + 1, element, i, move);
+        }
+        element[size--] = null;
     }
 
     public E get(int i) {
