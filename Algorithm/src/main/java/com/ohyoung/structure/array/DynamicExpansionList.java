@@ -32,7 +32,6 @@ public class DynamicExpansionList<E> {
         if (size <= 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        this.size = size;
         element = new Object[size];
     }
 
@@ -41,7 +40,6 @@ public class DynamicExpansionList<E> {
             throw new ArrayIndexOutOfBoundsException();
         }
         element = new Object[size];
-        this.size = size;
         this.element = element;
     }
 
@@ -49,23 +47,28 @@ public class DynamicExpansionList<E> {
      * 数组元素添加删除更新数组容量大小
      */
     public void add(E e) {
-
+        if (element.length == size) {
+            expansion();
+        }
+        element[size++] = e;
     }
 
     /**
      * 数组元素删除时更新数组容量大小
      */
-    public void remove(int i) {
+    public E remove(int i) {
         if (i >= size || i < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
+        E e = get(i);
         // 将i后的元素向前移一位
         int move = size - i - 1;
         // 非末节点
         if (move != 0) {
             System.arraycopy(element, i + 1, element, i, move);
         }
-        element[size--] = null;
+        element[--size] = null;
+        return e;
     }
 
     public E get(int i) {
@@ -79,7 +82,20 @@ public class DynamicExpansionList<E> {
      * 扩容
      */
     private void expansion() {
-        element = Arrays.copyOf(element, size * 2);
+        element = Arrays.copyOf(element, size + (size / 2));
+    }
+
+    public static void main(String[] args) {
+        DynamicExpansionList<Integer> list = new DynamicExpansionList<>(2);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        System.out.println("size: " + list.size);
+        System.out.println("index_1: " + list.get(1));
+        System.out.println("index_2: " + list.get(2));
+        System.out.println("remove_index_1: " + list.remove(1));
+        System.out.println("remove_index_0: " + list.remove(0));
+        System.out.println("index_0: " + list.get(0));
     }
 
 }
