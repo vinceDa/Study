@@ -28,10 +28,26 @@ public class Orderly {
         if (element.length == size) {
             throw new IndexOutOfBoundsException();
         }
+        if (size == 0) {
+            element[size++] = value;
+            return;
+        }
+        // 从头部插入
+        if (value <= element[0]) {
+            System.arraycopy(element, 0, element, 1, size);
+            element[0] = value;
+            return ;
+        }
+        // 从尾部新增
+        if (value >= element[size - 1]) {
+            element[size++] = value;
+            return ;
+        }
         int index = binarySearch(element, value);
-        int move = size - index - 1;
-        System.arraycopy(element, index + 1, element, index + 2, move);
-        element[index + 1] = value;
+        int move = size - index;
+        System.arraycopy(element, index, element, index + 1, move);
+        element[index] = value;
+        size++;
     }
 
     public Integer remove(int index) {
@@ -48,14 +64,13 @@ public class Orderly {
         return i;
     }
 
-    public void add(int index, int value) {
+    public void update(int index, int value) {
         if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        int targetIndex = binarySearch(element, value);
-        int move = size - index - 1;
-        System.arraycopy(element, index + 1, element, index + 2, move);
-        element[index + 1] = value;
+        // 先将index处的元素删除, 在调用add方法排序
+        remove(index);
+        add(value);
     }
 
     public Integer get(int index) {
@@ -68,12 +83,6 @@ public class Orderly {
     private int binarySearch(Integer[] arr, int value) {
         int start = 0;
         int end = size - 1;
-        if (value <= arr[start]) {
-            return 0;
-        }
-        if (value >= arr[end]) {
-            return end;
-        }
         while (start <= end) {
             int mid = start + (end - start) / 2;
             if (arr[mid] > value) {
@@ -88,8 +97,30 @@ public class Orderly {
         return start;
     }
 
-    // 添加元素时使用二分法找到位置, 然后将后面的元素全部后移一位
-
-    // 更新元素先用二分法找到插入的位置j, 再将更新位置i和j之间的元素覆盖到i及之后, 然后空白的位置j插入新元素
+    public static void main(String[] args) {
+        Orderly orderly = new Orderly();
+        orderly.add(1);
+        orderly.add(5);
+        orderly.add(4);
+        orderly.add(3);
+        orderly.add(11);
+        orderly.add(9);
+        orderly.add(8);
+        for (int i = 0; i < orderly.size; i++) {
+            System.out.print(orderly.get(i) + " ");
+        }
+        System.out.println();
+        orderly.update(2, 7);
+        for (int i = 0; i < orderly.size; i++) {
+            System.out.print(orderly.get(i) + " ");
+        }
+        System.out.println();
+        orderly.remove(1);
+        orderly.remove(1);
+        orderly.remove(1);
+        for (int i = 0; i < orderly.size; i++) {
+            System.out.print(orderly.get(i) + " ");
+        }
+    }
 
 }
