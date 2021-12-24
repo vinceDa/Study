@@ -38,9 +38,10 @@ public class IdeaVerification {
 
     @Test
     public void cs() {
-        LinkedList<Integer> linkedList = new LinkedList<>();
-        linkedList.getFirst();
-
+        int[] a = new int[]{1, 2, 3, 4, 5};
+        int[] b = new int[3];
+        System.arraycopy(a, 0 ,  a,2, 2);
+        System.out.println(Arrays.toString(a));
     }
 
     @Test
