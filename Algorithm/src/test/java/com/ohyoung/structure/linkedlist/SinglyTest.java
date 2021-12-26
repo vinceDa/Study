@@ -96,12 +96,8 @@ public class SinglyTest {
         Singly singly = new Singly();
         singly.insertTail(1);
         singly.insertTail(2);
-        singly.insertTail(3);
-        singly.insertTail(2);
-        singly.insertTail(1);
-        singly.insertTail(1);
         singly.printAll();
-        singly.deleteReciprocalNode(1);
+        singly.deleteReciprocalNode(2);
         singly.printAll();
     }
 
