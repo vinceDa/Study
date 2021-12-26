@@ -196,6 +196,13 @@ public class Singly {
 
     /**
      *  单链表反转, 推荐
+     *  例图
+     *  1->3->6->5
+     *  反转过程
+     *  1: null<-1 3->6->5   pre=null
+     *  2: null<-1<-3 6->5   pre=1
+     *  3: null<-1<-3<-6 5   pre=3
+     *  4: null<-1<-3<-6<-5  pre=6
      */
     public void reverse() {
         if (head == null || head.next == null) {
@@ -208,6 +215,7 @@ public class Singly {
             pre = head;
             head = next;
         }
+        // 反转完毕后, 头节点就是pre
         head = pre;
     }
 
@@ -292,15 +300,20 @@ public class Singly {
 
     /**
      *  删除倒数第N个节点
+     *  定义快慢两个指针, 快指针先走N+1步, 然后快慢指针一起走, 当快指针走到尾部的时候, 慢指针所处的位置就是第N-1个节点
      */
     public void deleteReciprocalNode(int n) {
+        if (head == null) {
+            return;
+        }
         Node slow = head;
         Node right = head;
         for (int i = 0; i <= n; i++) {
             if (right != null) {
                 right = right.next;
             } else {
-                // n超出了链表长度
+                // N等于链表长度, 说明是要删除第一个节点
+                head = head.next;
                 return;
             }
         }
