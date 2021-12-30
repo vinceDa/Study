@@ -10,8 +10,7 @@ class CustomerAssemblerTest {
     public void test() {
         CustomerSaveCommand saveCommand = new CustomerSaveCommand();
         saveCommand.setCustomerGUID(UUID.randomUUID());
-        saveCommand.setMobile(new Mobile("13713729011"));
-        saveCommand.setCustomerType("CustType_Person");
+        saveCommand.setMobile(new Mobile("13713729067"));
         CustomerAssembler instance = CustomerAssembler.INSTANCE;
         Customer customer = instance.toEntity(saveCommand);
         Mobile mobile = customer.getMobile();

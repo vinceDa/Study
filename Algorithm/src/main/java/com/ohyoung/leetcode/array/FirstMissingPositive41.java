@@ -23,6 +23,15 @@ package com.ohyoung.leetcode.array;
  */
 public class FirstMissingPositive41 {
 
+    /**
+     * 核心思路：置换。假如4在数组长度范围中，那么数组第4位（index=3）的位置将会被打上标记表示已出现，然后遍历数组，没有被标记的元素的下标+1则是答案。
+     * nums.length = 5;
+     * nums[i] = 4;
+     * if (0 <= nums[i] <= 5) {
+     *     nums[4 - 1] = 标记
+     * }
+     *
+     */
     public int firstMissingPositive(int[] nums) {
         // 极端情况N位数的数组[1,...N], 这时候未出现的正整数是N+1
         // 遍历数组, 得到的数设为x, 如果x∈[1,N], 那么将数组下标为x的值做个标记, 如果都有标记, 则是上述说的极端情况, 否则是没有标记的值所在的下标+1
@@ -39,7 +48,7 @@ public class FirstMissingPositive41 {
             // 有可能当前值已经被标记, 所以此处取绝对值
             int index = Math.abs(nums[i]);
             if (index >= 1 && index <= nums.length) {
-                // 已经被标记不能被重复标记, 所以取绝对值
+                // x∈[1,N], 添加标记, 已经被标记不能被重复标记, 所以取绝对值
                 nums[index-1] = -Math.abs(nums[index-1]);
             }
         }
@@ -54,7 +63,8 @@ public class FirstMissingPositive41 {
 
     public static void main(String[] args) {
         FirstMissingPositive41 example = new FirstMissingPositive41();
-
+        int[] nums = new int[]{7, 8, 9, 11, 12};
+        System.out.println(example.firstMissingPositive(nums));
     }
 
 }

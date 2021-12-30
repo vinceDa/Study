@@ -1,6 +1,6 @@
 package com.ohyoung.demo.ywy;
 
-import org.mapstruct.Mapper;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -10,5 +10,8 @@ public interface CustomerAssembler {
 
     CustomerDto toDTO(Customer customer);
 
+    @Mappings({
+            @Mapping(target = "mobile", expression = "java(new Mobile(command.getMobile()))")
+    })
     Customer toEntity(CustomerSaveCommand command);
 }

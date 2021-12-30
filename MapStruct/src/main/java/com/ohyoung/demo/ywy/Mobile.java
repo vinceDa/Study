@@ -9,9 +9,9 @@ public class Mobile {
     }
 
     public Mobile(String mobile) {
-        if (mobile != null && isValid(mobile)) {
-            System.out.println("手机号码格式错误");
-        }
+//        if (mobile != null && isValid(mobile)) {
+//            System.out.println("手机号码格式错误");
+//        }
         this.mobile = mobile;
     }
 

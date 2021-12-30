@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import org.junit.jupiter.api.Test;
 
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,15 +39,18 @@ public class IdeaVerification {
 
     @Test
     public void cs() {
-        int[] a = new int[]{1, 2, 3, 4, 5};
-        int[] b = new int[3];
-        System.arraycopy(a, 0 ,  a,2, 2);
-        System.out.println(Arrays.toString(a));
+        String str = "{0}:{1}:{2}:{3}:{4}";
+        String pattern = "\\:\\{[^}]*\\}";
+        String format = MessageFormat.format(str, "a", "b", "c");
+
+        System.out.println(format);
+        System.out.println(format.replaceAll(pattern, ""));
     }
 
     @Test
     public void custom() {
-        System.out.println(0.1 + 0.2 == 0.3);
+        String meterNo = "663超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号663超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号123超长的仪表表号";
+        System.out.println(meterNo.length());
     }
 
     @Test
