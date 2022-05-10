@@ -9,7 +9,7 @@ public interface CarMapper {
 
     CarMapper INSTANCE = Mappers.getMapper( CarMapper.class );
 
-    @Mapping(source = "numberOfSeats", target = "seatCount")
+    @Mapping(target = "seatCount", constant = "998")
     CarDto carToCarDto(Car car);
 
 }

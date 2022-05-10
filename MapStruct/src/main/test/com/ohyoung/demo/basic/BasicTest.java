@@ -2,11 +2,19 @@ package com.ohyoung.demo.basic;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
+
 class BasicTest {
+
 
     @Test
     public void other() {
-        System.out.println("md_House#AreaBuilding*md_House#ElevatorFloorFactor*fc_FeeStandard#Price".length());
+        Car car = new Car("make", 5, "type1");
+        Class<? extends Car> a = car.getClass();
+        Field[] fields = a.getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println(field);
+        }
     }
 
     @Test

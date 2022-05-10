@@ -12,9 +12,9 @@
     <module>Algorithm</module>
     <module>JdbcTemplate</module>
     <module>Concurrent</module>
-    <module>DDD</module>
     <module>MapStruct</module>
       <module>JPA</module>
+      <module>Spring</module>
   </modules>
 
   <name>Study</name>
