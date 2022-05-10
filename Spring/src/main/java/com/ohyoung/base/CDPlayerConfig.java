@@ -1,6 +1,5 @@
-package com.ohyoung;
+package com.ohyoung.base;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -8,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2022/5/10 17:16
  */
 @Configuration
-@ComponentScan
 public class CDPlayerConfig {
 
 }

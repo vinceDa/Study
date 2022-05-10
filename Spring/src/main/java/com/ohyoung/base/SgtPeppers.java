@@ -1,4 +1,4 @@
-package com.ohyoung;
+package com.ohyoung.base;
 
 import org.springframework.stereotype.Component;
 

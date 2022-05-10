@@ -1,13 +1,15 @@
 package com.ohyoung;
 
+import com.ohyoung.base.CDPlayerConfig;
+import com.ohyoung.base.ICompactDisc;
+import com.ohyoung.dependence.IMediaPlayer;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.Objects;
 
 /**
  * @author ouyb01
@@ -17,12 +19,21 @@ import java.util.Objects;
 @ContextConfiguration(classes = CDPlayerConfig.class)
 public class CDPlayerTest {
 
+
     @Autowired
     private ICompactDisc cd;
+
+    @Autowired
+    private IMediaPlayer player;
 
     @Test
     public void cdShouldNotBeNull() {
         Assert.assertNotNull(cd);
+    }
+
+    @Test
+    public void play() {
+        player.play();
     }
 
 }
