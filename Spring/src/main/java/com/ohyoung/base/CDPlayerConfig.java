@@ -1,5 +1,8 @@
 package com.ohyoung.base;
 
+import com.ohyoung.dependence.CDPlayer;
+import com.ohyoung.dependence.IMediaPlayer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -8,5 +11,15 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class CDPlayerConfig {
+
+    @Bean
+    public ICompactDisc sgtPeppers() {
+        return new SgtPeppers();
+    }
+
+    @Bean
+    public IMediaPlayer cdPlayer() {
+        return new CDPlayer(sgtPeppers());
+    }
 
 }

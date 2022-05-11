@@ -13,4 +13,8 @@ public class WithEnum {
         this.type = EnumType.convert(type);
     }
 
+    public Integer enum2Int() {
+        return this.type.getType();
+    }
+
 }

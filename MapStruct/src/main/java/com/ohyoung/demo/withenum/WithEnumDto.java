@@ -1,8 +1,6 @@
 package com.ohyoung.demo.withenum;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class WithEnumDto {
@@ -10,7 +8,7 @@ public class WithEnumDto {
     private int seatCount;
     private Integer type;
 
-    public void setType(EnumType enumType) {
+    public void getType(EnumType enumType) {
         this.type = enumType.getType();
     }
 }

@@ -8,7 +8,16 @@ public interface WithEnumMapper {
 
     WithEnumMapper INSTANCE = Mappers.getMapper(WithEnumMapper.class);
 
-    @Mapping(source = "numberOfSeats", target = "seatCount")
+    @Mappings({
+        @Mapping(source = "numberOfSeats", target = "seatCount"),
+        @Mapping(target = "type", expression = "java(withEnum.enum2Int())")
+    })
     WithEnumDto toDto(WithEnum withEnum);
+
+
+    @Mappings({
+        @Mapping(source = "seatCount", target = "numberOfSeats")
+    })
+    WithEnum toEnum(WithEnumDto withEnumDto);
 
 }

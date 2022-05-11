@@ -14,8 +14,7 @@ class CustomerAssemblerTest {
         CustomerAssembler instance = CustomerAssembler.INSTANCE;
         Customer customer = instance.toEntity(saveCommand);
         Mobile mobile = customer.getMobile();
-
-        System.out.println(customer);
+        assert mobile.getMobile().equals(saveCommand.getMobile());
     }
 
 }
