@@ -28,26 +28,51 @@ public class IsPalindrome125 {
         System.out.println("isPalindrome: " + example.isPalindrome(s));
         s = "race a car";
         System.out.println("isPalindrome: " + example.isPalindrome(s));
+        s = ",,,,,,";
+        System.out.println("isPalindrome: " + example.isPalindrome(s));
+        s = "0P";
+        System.out.println("isPalindrome: " + example.isPalindrome(s));
+        s = "ab_a";
+        System.out.println("isPalindrome: " + example.isPalindrome(s));
     }
 
+    /**
+     * 使用双指针分别指向头和尾, 当头和尾指向的char都为字符和数字时才进行比较, 比较成功后再往中间移动,
+     * 当指针重合后说明匹配成功
+     */
     public boolean isPalindrome(String s) {
         int length = s.length();
+        int start = 0;
         int end = length - 1;
-        // 遍历每个字符
-        for (int i = 0; i < length; i++) {
-            char c = s.charAt(i);
-            // 如果c不是字符或数字, 则略过
-            if (c < '1' || (c > '9' && c - 'a' > 35 && c - 'A' > 35)) {
-
+        while (start < end) {
+            char c1 = s.charAt(start);
+            if (!isCharacter(c1) && !isNum(c1)) {
+                start++;
+                continue;
             }
-            if () {
-
+            char c2 = s.charAt(end);
+            if (!isCharacter(c2) && !isNum(c2)) {
+                end--;
+                continue;
             }
+            // 不相等且存在数字, 则铁定不回文
+            if (c1 != c2 && (isNum(c1) || isNum(c2))) {
+                return false;
+            }
+            if (c1 != c2 && isCharacter(c1) && isCharacter(c2)  && c1 - 32 != c2 && c2 - 32 != c1) {
+                return false;
+            }
+            start++;
+            end--;
         }
-        // 从第一个有效字符开始, 从末端找匹配项, 匹配成功则记录end下标并继续第二个字符
-
-        // 当遍历下标>=end时, 遍历结束, 返回结果
         return true;
     }
 
+    private boolean isCharacter(char c) {
+        return (c >= 'a' && c <= 'z') || c >= 'A' && c <= 'Z';
+    }
+
+    private boolean isNum(char c) {
+        return c >= '0' && c <= '9';
+    }
 }
