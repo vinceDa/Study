@@ -17,11 +17,28 @@ public class ReplaceSpaceOffer05 {
 
     public static void main(String[] args) {
         ReplaceSpaceOffer05 example = new ReplaceSpaceOffer05();
-        System.out.println("LengthOfLastWord58 We are happy.: " + example.replaceSpace("We are happy."));
+        System.out.println("LengthOfLastWord58 We are happy.: " + "We%20are%20happy.".equals(example.replaceSpace("We are happy.")));
+        System.out.println("LengthOfLastWord58 : " + "".equals(example.replaceSpace("")));
     }
 
     public String replaceSpace(String s) {
-        return "";
+        // 创建一个3s大的数组, 保证能够容纳所有元素
+        char[] array = new char[s.length() * 3];
+        // 创建变量size记录真实大小, 用于最后切割数组
+        int size = 0;
+        // 遍历s
+        for (int i = 0; i < s.length(); i++) {
+            // 碰到空格就将其替换成%20(占三个元素)
+            if (s.charAt(i) == ' ') {
+                array[size++] = '%';
+                array[size++] = '2';
+                array[size++] = '0';
+            } else {
+                array[size++] = s.charAt(i);
+            }
+        }
+        // 将字符数组转换为String
+        return new String(array, 0, size);
     }
 
 }

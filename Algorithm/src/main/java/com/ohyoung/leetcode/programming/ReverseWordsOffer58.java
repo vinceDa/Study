@@ -21,10 +21,10 @@ package com.ohyoung.leetcode.programming;
  * @author ohYoung
  * @date 2022/5/25 21:58
  */
-public class ReverseWords58 {
+public class ReverseWordsOffer58 {
 
     public static void main(String[] args) {
-        ReverseWords58 example = new ReverseWords58();
+        ReverseWordsOffer58 example = new ReverseWordsOffer58();
         String s = "the sky is blue";
         System.out.println("reverseWords: " + example.reverseWords(s));
         s = " hello world! ";

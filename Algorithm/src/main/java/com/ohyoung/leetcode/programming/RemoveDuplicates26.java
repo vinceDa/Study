@@ -39,11 +39,25 @@ public class RemoveDuplicates26 {
     public static void main(String[] args) {
         RemoveDuplicates26 example = new RemoveDuplicates26();
         int[] nums = new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-        System.out.println("removeDuplicates " + example.removeDuplicates(nums));
+        System.out.println("removeDuplicates: " + example.removeDuplicates(nums));
     }
 
     public int removeDuplicates(int[] nums) {
-        return 0;
+        // nums为0时直接返回0
+        if (nums.length == 0) {
+            return 0;
+        }
+        // nums>0时, nums[0]的元素不会移动, 所以从nums[1]开始删除重复元素
+        // 由于需要在原数组修改, 所以这里使用快慢指针, fast下标用于比对前后元素是否相等, slow指针记录去重后的数字后前移一位记录数组大小
+        int slow = 1;
+        int fast = 1;
+        while (fast < nums.length) {
+            if (nums[fast] != nums[fast - 1]) {
+                nums[slow++] = nums[fast];
+            }
+            fast++;
+        }
+        return slow;
     }
 
 }

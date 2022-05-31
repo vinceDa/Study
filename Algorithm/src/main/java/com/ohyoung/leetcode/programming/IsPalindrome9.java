@@ -20,7 +20,7 @@ package com.ohyoung.leetcode.programming;
  * 解释：从右向左读, 为 01 。因此它不是一个回文数。
  *
  * 提示：
- * -231<= x <= 231- 1
+ * -2^31 <= x <= 2^31- 1
  * @author ohYoung
  * @date 2022/5/30 23:03
  */
@@ -29,13 +29,34 @@ public class IsPalindrome9 {
     public static void main(String[] args) {
         IsPalindrome9 example = new IsPalindrome9();
         System.out.println("IsPalindrome9 121: " + example.isPalindrome(121));
+        System.out.println("IsPalindrome9 12321: " + example.isPalindrome(12321));
+        System.out.println("IsPalindrome9 123321: " + example.isPalindrome(123321));
         System.out.println("IsPalindrome9 -121: " + example.isPalindrome(-121));
         System.out.println("IsPalindrome9 10: " + example.isPalindrome(10));
     }
 
 
     public boolean isPalindrome(int x) {
-        return true;
+        // 负数肯定不是回文数
+        if (x < 0) {
+            return false;
+        }
+        // 个位数肯定是回文数
+        if (x < 10) {
+            return true;
+        }
+        // 大于10且能整除10的数肯定不是回文数
+        if (x % 10 == 0) {
+            return false;
+        }
+        // 反转后半部分数字, 当后半部分数字大于或等于前半部分数字时, 说明反转结束
+        int i = 0;
+        while (i < x) {
+            i = i * 10 + x % 10;
+            x /= 10;
+        }
+        // 当x为奇数位时, 比如12321, 最终得到的结果是12和123, 由于中位数对结果不会造成影响, 所以直接除以10再判断即可
+        return x == i || x == i / 10;
     }
 
 }

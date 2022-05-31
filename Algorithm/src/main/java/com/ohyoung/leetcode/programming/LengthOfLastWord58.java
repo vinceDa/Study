@@ -33,10 +33,26 @@ public class LengthOfLastWord58 {
         System.out.println("LengthOfLastWord58 Hello World: " + example.lengthOfLastWord("Hello World"));
         System.out.println("LengthOfLastWord58    fly me   to   the moon  : " + example.lengthOfLastWord("   fly me   to   the moon  "));
         System.out.println("LengthOfLastWord58 luffy is still joyboy: " + example.lengthOfLastWord("luffy is still joyboy"));
+        System.out.println("LengthOfLastWord58 a: " + example.lengthOfLastWord("a"));
     }
 
     public int lengthOfLastWord(String s) {
-        return 0;
+        int length = s.length();
+        // 忽略开头的空格
+        boolean isFirstBlank = true;
+        int count = 0;
+        for (int i = length - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            if (c == ' ' && !isFirstBlank) {
+                return count;
+            }
+            if (c == ' ') {
+                continue;
+            }
+            count++;
+            isFirstBlank = false;
+        }
+        return count;
     }
 
 }
