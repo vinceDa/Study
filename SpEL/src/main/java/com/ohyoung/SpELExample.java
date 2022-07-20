@@ -60,7 +60,6 @@ public class SpELExample {
         StandardEvaluationContext standardEvaluationContext = new StandardEvaluationContext(simple);
         parser.parseExpression("booleanList[0]").setValue(standardEvaluationContext, "false");
         System.out.println(simple.booleanList.get(0));
-
         System.out.println(parser.parseExpression("Birthdate.getYear() + 1900").getValue(context));
 
         // 需要被SpEl解析的模板前缀和后缀 {{ expression  }}

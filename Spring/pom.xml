@@ -20,6 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <spring.boot.version>2.7.0</spring.boot.version>
     </properties>
 
     <dependencies>
@@ -54,6 +55,25 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>5.3.19</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Spring AOP -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
     </dependencies>
 
