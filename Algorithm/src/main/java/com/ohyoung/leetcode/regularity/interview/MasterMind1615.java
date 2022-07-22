@@ -1,5 +1,7 @@
 package com.ohyoung.leetcode.regularity.interview;
 
+import java.util.Arrays;
+
 /**
  * 珠玑妙算游戏（the game of master mind）的玩法如下。
  * 计算机有4个槽，每个槽放一个球，颜色可能是红色（R）、黄色（Y）、绿色（G）或蓝色（B）。例如，计算机可能有RGGB 4种（槽1为红色，槽2、3为绿色，槽4为蓝色）。
@@ -23,10 +25,36 @@ public class MasterMind1615 {
 
     public static void main(String[] args) {
         MasterMind1615 example = new MasterMind1615();
-        System.out.println(example.masterMind("RGBY", "GGRR"));
+        System.out.println(Arrays.toString(example.masterMind("BRBB", "RBGY")));
+        System.out.println(Arrays.toString(example.masterMind("BGBG", "RGBR")));
+        System.out.println(Arrays.toString(example.masterMind("BRBB","RBGY")));
+        System.out.println(Arrays.toString(example.masterMind("RGBY", "GGRR")));
+        System.out.println(Arrays.toString(example.masterMind("RGRB", "BBBY")));
     }
 
     public int[] masterMind(String solution, String guess) {
-        return null;
+        char[] solutions = solution.toCharArray();
+        char[] guesses = guess.toCharArray();
+        int[] answer = new int[2];
+        for (int i = 0; i < solutions.length; i++) {
+            if (solutions[i] == guesses[i]) {
+                solutions[i] = ' ';
+                guesses[i] = ' ';
+                answer[0]++;
+            }
+        }
+        for (int i = 0; i < guesses.length; i++) {
+            if (guesses[i] != ' ') {
+                for (int j = 0; j < solutions.length; j++) {
+                    if (guesses[i] == solutions[j]) {
+                        guesses[i] = ' ';
+                        solutions[j] = ' ';
+                        answer[1]++;
+                        break;
+                    }
+                }
+            }
+        }
+        return answer;
     }
 }

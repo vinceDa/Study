@@ -1,7 +1,5 @@
 package com.ohyoung.leetcode.regularity;
 
-import java.util.List;
-
 /**
  * 编写一个高效的算法来搜索mxn矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：
  * 每行的元素从左到右升序排列。
@@ -27,10 +25,10 @@ import java.util.List;
  * @author ouyb01
  * @date 2022/6/1 14:55
  */
-public class SearchMatrix240 {
+public class SearchMatrix240_ {
 
     public static void main(String[] args) {
-        SearchMatrix240 example = new SearchMatrix240();
+        SearchMatrix240_ example = new SearchMatrix240_();
         int[][] matrix = new int[5][5];
         matrix[0][0] = 1;
         matrix[0][1] = 4;

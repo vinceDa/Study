@@ -1,6 +1,6 @@
 package com.ohyoung.leetcode.regularity;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,10 +23,10 @@ import java.util.List;
  * @author ouyb01
  * @date 2022/6/1 14:55
  */
-public class SpiralOrder54 {
+public class SpiralOrder54_ {
 
     public static void main(String[] args) {
-        SpiralOrder54 example = new SpiralOrder54();
+        SpiralOrder54_ example = new SpiralOrder54_();
         int[][] matrix = new int[3][3];
         matrix[0][0] = 1;
         matrix[0][1] = 2;
@@ -55,7 +55,33 @@ public class SpiralOrder54 {
     }
 
     public List<Integer> spiralOrder(int[][] matrix) {
-        return null;
+        if (matrix == null) {
+            return new ArrayList<>();
+        }
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        if (rows == 0 || cols == 0) {
+            return new ArrayList<>();
+        }
+        int total = rows * cols;
+        List<Integer> res = new ArrayList<>(total);
+        int row = 0;
+        int col = 0;
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int directIndex = 0;
+        boolean[][] visited = new boolean[rows][cols];
+        for (int i = 0; i < total; i++) {
+            res.add(matrix[row][col]);
+            visited[row][col] = true;
+            int nextRow = row + directions[directIndex][0];
+            int nextCol = col + directions[directIndex][1];
+            if (nextRow < 0 || nextRow >= rows || nextCol >= cols || visited[nextRow][nextCol]) {
+                directIndex = (directIndex + 1) % 4;
+            }
+            row += directions[directIndex][0];
+            col += directions[directIndex][1];
+        }
+        return res;
     }
 
 }

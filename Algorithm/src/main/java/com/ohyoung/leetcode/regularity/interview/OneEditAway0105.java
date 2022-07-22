@@ -25,9 +25,47 @@ public class OneEditAway0105 {
         OneEditAway0105 example = new OneEditAway0105();
         System.out.println(example.oneEditAway("pale", "ple"));
         System.out.println(example.oneEditAway("pales", "pal"));
+        System.out.println(example.oneEditAway("pal", "aal"));
+        System.out.println(example.oneEditAway("teacher", "attacher"));
     }
 
     public boolean oneEditAway(String first, String second) {
+        if (first == null || second == null) {
+            return false;
+        }
+        if (Math.abs(first.length() - second.length()) > 1) {
+            return false;
+        }
+        int diff = 0;
+        if (first.length() == second.length()) {
+            for (int i = 0; i < first.length(); i++) {
+                if (first.charAt(i) != second.charAt(i)) {
+                    diff++;
+                }
+                if (diff > 1) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        if (first.length() > second.length()) {
+            String tmp = first;
+            first = second;
+            second = tmp;
+        }
+        int i = 0;
+        int j = 0;
+        while (i < first.length()) {
+            if (first.charAt(i) != second.charAt(j)) {
+                diff++;
+            } else {
+                i++;
+            }
+            j++;
+            if (diff > 1) {
+                return false;
+            }
+        }
         return true;
     }
 

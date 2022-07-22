@@ -33,6 +33,18 @@ public class CanJump55 {
     }
 
     public boolean canJump(int[] nums) {
-        return true;
+        // 记录可达的最远位置
+        int fast = 0;
+        for (int i = 0; i < nums.length; i++) {
+            // 最远位置内的所有下标都可到达, 循环范围内的下标, 获取当前下标可达的最远位置i + nums[i], 如果大于fast则替换
+            if (fast >= i && i + nums[i] > fast) {
+                fast = i + nums[i];
+            }
+            // 末尾可达
+            if (fast >= nums.length - 1) {
+                return true;
+            }
+        }
+        return false;
     }
 }

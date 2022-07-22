@@ -31,6 +31,7 @@ public class Rotate48 {
         matrix[2][1] = 8;
         matrix[2][2] = 9;
         example.rotate(matrix);
+        System.out.println(Arrays.deepToString(matrix));
         matrix = new int[4][4];
         matrix[0][0] = 5;
         matrix[0][1] = 1;
@@ -49,10 +50,29 @@ public class Rotate48 {
         matrix[3][2] = 14;
         matrix[3][3] = 16;
         example.rotate(matrix);
+        System.out.println(Arrays.deepToString(matrix));
     }
 
+    /**
+     * 先水平翻转  m[row][col] = m[n - row - 1][col]
+     * 然后主对角线翻转 m[row][col] = m[col][row]
+     */
     public void rotate(int[][] matrix) {
-
+        for (int row = 0; row < matrix.length / 2; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                int tmp = matrix[row][col];
+                matrix[row][col] = matrix[matrix.length - row - 1][col];
+                matrix[matrix.length - row - 1][col] = tmp;
+            }
+        }
+        for (int row = 0; row < matrix.length / 2; row++) {
+            // 对角线翻转时, 只需要翻转对角线往下/往上的元素即可
+            for (int col = 0; col < row; col++) {
+                int tmp = matrix[row][col];
+                matrix[row][col] = matrix[col][row];
+                matrix[col][row] = tmp;
+            }
+        }
     }
 
 }

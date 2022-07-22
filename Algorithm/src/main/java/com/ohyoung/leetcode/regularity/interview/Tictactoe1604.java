@@ -32,10 +32,10 @@ package com.ohyoung.leetcode.regularity.interview;
  * @author ouyb01
  * @date 2022/6/1 14:50
  */
-public class Tictactoe1614 {
+public class Tictactoe1604 {
 
     public static void main(String[] args) {
-        Tictactoe1614 example = new Tictactoe1614();
+        Tictactoe1604 example = new Tictactoe1604();
         String[] board = new String[]{"O X", " XO", "X O"};
         System.out.println(example.tictactoe(board));
         board = new String[]{"OOX","XXO","OXO"};
@@ -44,8 +44,44 @@ public class Tictactoe1614 {
         System.out.println(example.tictactoe(board));
     }
 
+
     public String tictactoe(String[] board) {
-        return null;
+        int length = board.length;
+        int horizontal;
+        int vertical;
+        int leftSlash = 0;
+        int rightSlash = 0;
+        boolean flag = false;
+        for (int i = 0; i < board.length; i++) {
+            // 存在三横三纵, 所以每次判断前要清空
+            horizontal = 0;
+            vertical = 0;
+            for (int j = 0; j < board[i].length(); j++) {
+                horizontal += board[i].charAt(j);
+                vertical += board[j].charAt(i);
+                if (board[i].charAt(j) == ' ') {
+                    flag = true;
+                }
+            }
+            if (horizontal == 'X' * length || vertical == 'X' * length) {
+                return "X";
+            }
+            if (horizontal == 'O' * length || vertical == 'O' * length) {
+                return "O";
+            }
+            leftSlash += board[i].charAt(i);
+            rightSlash += board[i].charAt(length - i - 1);
+        }
+        if (leftSlash == 'X' * length || rightSlash == 'X' * length) {
+            return "X";
+        }
+        if (leftSlash == 'O' * length || rightSlash == 'O' * length) {
+            return "O";
+        }
+        if (flag) {
+            return "Pending";
+        }
+        return "Draw";
     }
 
 
