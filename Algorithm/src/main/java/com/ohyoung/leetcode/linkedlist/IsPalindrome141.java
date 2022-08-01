@@ -1,7 +1,6 @@
 package com.ohyoung.leetcode.linkedlist;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.ohyoung.leetcode.linkedlist.xzg.ReverseList206;
 
 /**
  * 判断一个链表是否为回文链表
@@ -40,7 +39,8 @@ public class IsPalindrome141 {
             slow = slow.next;
             fast = fast.next.next;
         }
-        ListNode reverse = Reverse206.reverse(slow);
+        ReverseList206 reverseList206 = new ReverseList206();
+        ListNode reverse = reverseList206.reverse(slow);
         ListNode front = head;
         ListNode behind = reverse;
         while (behind != null) {
@@ -51,7 +51,7 @@ public class IsPalindrome141 {
                 return false;
             }
         }
-        Reverse206.reverse(reverse);
+        reverseList206.reverse(reverse);
         return true;
     }
 
