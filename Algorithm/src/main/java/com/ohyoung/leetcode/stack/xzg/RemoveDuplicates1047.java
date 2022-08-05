@@ -1,4 +1,4 @@
-package com.ohyoung.leetcode.stack;
+package com.ohyoung.leetcode.stack.xzg;
 
 /**
  * 给出由小写字母组成的字符串S，重复项删除操作会选择两个相邻且相同的字母，并删除它们。

@@ -1,4 +1,7 @@
-package com.ohyoung.leetcode.stack;
+package com.ohyoung.leetcode.stack.xzg;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 /**
  * 请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（push、top、pop 和 empty）。
@@ -34,29 +37,41 @@ package com.ohyoung.leetcode.stack;
  * 每次调用 pop 和 top 都保证栈不为空
  *
  * 进阶：你能否仅用一个队列来实现栈。
- * 链接：https://leetcode.cn/problems/implement-stack-using-queues
+ * 链接：<a href="https://leetcode.cn/problems/implement-stack-using-queues">...</a>
  * @author ouyb01
  * @date 2022/6/2 17:34
  */
-public class MyStack {
-    public MyStack() {
+public class MyStack225 {
 
+    public static void main(String[] args) {
+        MyStack225 myStack = new MyStack225();
+        myStack.push(1);
+        myStack.push(2);
+        System.out.println(myStack.top());
+        myStack.push(3);
+        System.out.println(myStack.top());
+    }
+
+    private ArrayDeque<Integer> queue;
+
+    public MyStack225() {
+        queue = new ArrayDeque<>();
     }
 
     public void push(int x) {
-
+        queue.add(x);
     }
 
     public int pop() {
-        return 0;
+        return queue.isEmpty() ? -1 : queue.pollLast();
     }
 
     public int top() {
-        return 0;
+        return queue.isEmpty() ? -1 : queue.peekLast();
     }
 
     public boolean empty() {
-        return true;
+        return queue.isEmpty();
     }
     
 

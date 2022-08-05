@@ -1,4 +1,4 @@
-package com.ohyoung.leetcode.stack.more;
+package com.ohyoung.leetcode.stack.xzg.more.offer;
 
 /**
  * 请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的均摊时间复杂度都是O(1)。
@@ -25,9 +25,9 @@ package com.ohyoung.leetcode.stack.more;
  * @author ouyb01
  * @date 2022/6/2 17:56
  */
-public class MaxQueue {
+public class MaxQueue59 {
 
-    public MaxQueue() {
+    public MaxQueue59() {
 
     }
 

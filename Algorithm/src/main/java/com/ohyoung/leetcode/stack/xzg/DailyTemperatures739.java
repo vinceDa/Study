@@ -1,4 +1,4 @@
-package com.ohyoung.leetcode.stack;
+package com.ohyoung.leetcode.stack.xzg;
 
 /**
  * 给定一个整数数组temperatures，表示每天的温度，返回一个数组answer，其中answer[i]是指在第 i 天之后，

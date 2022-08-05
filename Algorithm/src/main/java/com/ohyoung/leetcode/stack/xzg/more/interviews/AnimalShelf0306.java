@@ -1,4 +1,4 @@
-package com.ohyoung.leetcode.stack.more;
+package com.ohyoung.leetcode.stack.xzg.more.interviews;
 
 /**
  * 动物收容所。有家动物收容所只收容狗与猫，且严格遵守“先进先出”的原则。在收养该收容所的动物时，
@@ -30,9 +30,9 @@ package com.ohyoung.leetcode.stack.more;
  * @author ouyb01
  * @date 2022/6/2 17:53
  */
-public class AnimalShelf {
+public class AnimalShelf0306 {
 
-    public AnimalShelf() {
+    public AnimalShelf0306() {
 
     }
 

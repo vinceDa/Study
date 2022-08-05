@@ -1,4 +1,6 @@
-package com.ohyoung.leetcode.stack.offer;
+package com.ohyoung.leetcode.stack.xzg.offer;
+
+import java.util.Stack;
 
 /**
  * 用两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead ，
@@ -20,22 +22,33 @@ package com.ohyoung.leetcode.stack.offer;
  * 1 <= values <= 10000
  * 最多会对appendTail、deleteHead 进行10000次调用
  *
- * 链接：https://leetcode.cn/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof
+ * 链接：<a href="https://leetcode.cn/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof">...</a>
  *
  * @author ouyb01
  * @date 2022/6/2 17:33
  */
-public class CQueue {
-    public CQueue() {
+public class CQueue09 {
 
+    private Stack<Integer> stackIn;
+    private Stack<Integer> stackOut;
+
+    public CQueue09() {
+        stackIn = new Stack<>();
+        stackOut = new Stack<>();
     }
 
     public void appendTail(int value) {
-
+        stackIn.push(value);
     }
 
     public int deleteHead() {
-        return 0;
+        if (!stackOut.isEmpty()) {
+            return stackOut.pop();
+        }
+        while (!stackIn.isEmpty()) {
+            stackOut.push(stackIn.pop());
+        }
+        return stackOut.isEmpty() ? -1 :stackOut.pop();
     }
 
 

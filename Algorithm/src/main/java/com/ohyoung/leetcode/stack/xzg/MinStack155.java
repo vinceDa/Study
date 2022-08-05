@@ -1,4 +1,4 @@
-package com.ohyoung.leetcode.stack;
+package com.ohyoung.leetcode.stack.xzg;
 
 import java.util.Stack;
 
@@ -11,7 +11,7 @@ import java.util.Stack;
  * void pop() 删除堆栈顶部的元素。
  * int top() 获取堆栈顶部的元素。
  * int getMin() 获取堆栈中的最小元素。
- * 
+ *
  *
  * 示例 1:
  * 输入：
@@ -36,14 +36,14 @@ import java.util.Stack;
  * pop、top 和 getMin 操作总是在 非空栈 上调用
  * push,pop,top, andgetMin最多被调用3 * 104次
  *
- * 链接：https://leetcode.cn/problems/min-stack
+ * 链接：<a href="https://leetcode.cn/problems/min-stack">...</a>
  * @author ohYoung
  * @date 2021/7/7 22:06
  */
-public class MinStack {
+public class MinStack155 {
 
     public static void main(String[] args) {
-        MinStack minStack = new MinStack();
+        MinStack155 minStack = new MinStack155();
         minStack.push(-2);
         minStack.push(0);
         minStack.push(-3);
@@ -60,14 +60,14 @@ public class MinStack {
      */
     Stack<Integer> minStack;
 
-    public MinStack() {
+    public MinStack155() {
         normalStack = new Stack<>();
         minStack = new Stack<>();
     }
 
     public void push(int val) {
         normalStack.push(val);
-        if (minStack.size() == 0) {
+        if (minStack.isEmpty()) {
             minStack.push(val);
         } else {
             Integer min = minStack.peek();

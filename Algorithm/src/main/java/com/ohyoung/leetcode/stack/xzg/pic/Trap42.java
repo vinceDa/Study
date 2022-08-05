@@ -1,4 +1,4 @@
-package com.ohyoung.leetcode.stack.pic;
+package com.ohyoung.leetcode.stack.xzg.pic;
 
 /**
  * 给定n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
@@ -17,7 +17,7 @@ package com.ohyoung.leetcode.stack.pic;
  * 1 <= n <= 2 * 104
  * 0 <= height[i] <= 105
  *
- * 链接：https://leetcode.cn/problems/trapping-rain-water
+ * 链接：<a href="https://leetcode.cn/problems/trapping-rain-water">...</a>
  *
  * @author ouyb01
  * @date 2022/6/2 17:49

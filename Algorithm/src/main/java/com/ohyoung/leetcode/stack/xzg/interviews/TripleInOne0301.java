@@ -1,4 +1,4 @@
-package com.ohyoung.leetcode.stack;
+package com.ohyoung.leetcode.stack.xzg.interviews;
 
 /**
  * 三合一。描述如何只用一个数组来实现三个栈。
@@ -23,30 +23,35 @@ package com.ohyoung.leetcode.stack;
  * 提示：
  * 0 <= stackNum <= 2
  *
- * 链接：https://leetcode.cn/problems/three-in-one-lcci
+ * 链接：<a href="https://leetcode.cn/problems/three-in-one-lcci">...</a>
  * @author ouyb01
  * @date 2022/6/2 17:38
  */
-public class TripleInOne {
+public class TripleInOne0301 {
+    int size;
+    int[][] stack;
+    int[] top;
 
-    public TripleInOne(int stackSize) {
-
+    public TripleInOne0301(int stackSize) {
+        size = stackSize;
+        stack = new int[3][size];
+        top = new int[3];
     }
 
     public void push(int stackNum, int value) {
-
+        if (top[stackNum] < size)
+            stack[stackNum][top[stackNum]++] = value;
     }
 
     public int pop(int stackNum) {
-        return 0;
+        return isEmpty(stackNum) ? -1 : stack[stackNum][--top[stackNum]];
     }
 
     public int peek(int stackNum) {
-        return 0;
+        return isEmpty(stackNum) ? -1 : stack[stackNum][top[stackNum] - 1];
     }
 
     public boolean isEmpty(int stackNum) {
-        return true;
+        return top[stackNum] == 0;
     }
-
 }
