@@ -1,5 +1,8 @@
 package com.ohyoung.leetcode.stack.xzg;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * 给出由小写字母组成的字符串S，重复项删除操作会选择两个相邻且相同的字母，并删除它们。
  * 在 S 上反复执行重复项删除操作，直到无法继续删除。
@@ -16,18 +19,42 @@ package com.ohyoung.leetcode.stack.xzg;
  * 1 <= S.length <= 20000
  * S 仅由小写英文字母组成。
  *
- * 链接：https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string
+ * 链接：<a href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string">...</a>
  * @author ouyb01
  * @date 2022/6/2 17:42
  */
 public class RemoveDuplicates1047 {
 
     public static void main(String[] args) {
-
+        RemoveDuplicates1047 example = new RemoveDuplicates1047();
+        System.out.println(example.removeDuplicates("abbaca"));
+        System.out.println(example.removeDuplicates("a"));
+        System.out.println(example.removeDuplicates("ab"));
+        System.out.println(example.removeDuplicates("aba"));
+        System.out.println(example.removeDuplicates("abba"));
     }
 
     public String removeDuplicates(String s) {
-        return "";
+        Deque<Character> stack = new ArrayDeque<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (stack.isEmpty() || stack.peek() != s.charAt(i)) {
+                stack.push(s.charAt(i));
+            } else {
+                stack.pop();
+            }
+        }
+        if (stack.isEmpty()) {
+            return "";
+        }
+        Deque<Character> resStack = new ArrayDeque<>();
+        String res = "";
+        while (!stack.isEmpty()) {
+            resStack.push(stack.pop());
+        }
+        while (!resStack.isEmpty()) {
+            res = res.concat(resStack.pop().toString());
+        }
+        return res;
     }
     
 
