@@ -15,7 +15,6 @@
     <module>MapStruct</module>
       <module>JPA</module>
       <module>SpEL</module>
-    <module>DesignPattern</module>
       <module>Spring</module>
   </modules>
 

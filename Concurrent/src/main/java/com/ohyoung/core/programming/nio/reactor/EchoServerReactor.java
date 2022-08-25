@@ -6,7 +6,9 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author ouyb01
@@ -30,7 +32,35 @@ public class EchoServerReactor implements Runnable{
 
     @Override
     public void run() {
+        try {
+            while (!Thread.interrupted()) {
+                // 限时阻塞查询
+                selector.select(1000);
+                Set<SelectionKey> selected = selector.selectedKeys();
+                if (Objects.isNull(selected) || selected.isEmpty()) {
+                    continue;
+                }
+                Iterator<SelectionKey> it = selected.iterator();
+                while (it.hasNext()) {
+                    // Reactor负责dispatch收到的事件
+                    SelectionKey sk = it.next();
+                    // 避免下次重复处理
+                    it.remove();
+                    dispatch(sk);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    void dispatch(SelectionKey sk) {
+        Runnable handler = (Runnable) sk.attachment();
+        // 调用之前attach绑定到选择键的handler处理对象
+        if (Objects.nonNull(handler)) {
+            handler.run();
+        }
     }
 
     class AcceptorHandler implements Runnable {
@@ -48,5 +78,9 @@ public class EchoServerReactor implements Runnable{
             }
 
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Thread(new EchoServerReactor()).start();
     }
 }
