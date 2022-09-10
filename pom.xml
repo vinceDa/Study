@@ -12,10 +12,8 @@
     <module>Algorithm</module>
     <module>JdbcTemplate</module>
     <module>Concurrent</module>
-    <module>MapStruct</module>
-      <module>JPA</module>
-      <module>SpEL</module>
       <module>Spring</module>
+      <module>Netty</module>
   </modules>
 
   <name>Study</name>
@@ -31,6 +29,7 @@
     <hutool.version>5.5.7</hutool.version>
     <junit.version>5.8.1</junit.version>
     <hamcrest.core.version>2.2</hamcrest.core.version>
+    <slf4j-api.version>2.0.0</slf4j-api.version>
   </properties>
 
  <dependencyManagement>
@@ -69,6 +68,15 @@
        <version>${org.projectlombok.version}</version>
        <scope>provided</scope>
      </dependency>
+
+     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+     <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-api</artifactId>
+       <version>${slf4j-api.version}</version>
+     </dependency>
+
+
    </dependencies>
  </dependencyManagement>
 

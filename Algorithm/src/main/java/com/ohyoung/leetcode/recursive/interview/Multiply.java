@@ -21,11 +21,30 @@ package com.ohyoung.leetcode.recursive.interview;
 public class Multiply {
 
     public static void main(String[] args) {
-        System.out.println("ed917087223aac98e7c14a989468d72f".length());
+        Multiply example = new Multiply();
+        System.out.println(example.multiply(1, 10));
+        System.out.println(example.multiply(3, 4));
     }
 
     public int multiply(int a, int b) {
-        return 0;
+        if (a > b) {
+            return multiplyCur(a, b);
+        }
+        return multiplyCur(b, a);
+    }
+
+    public int multiplyCur(int a, int b) {
+        System.out.println("a: " + a + "   b: " + b);
+        if (a == 0 || b == 0) {
+            return 0;
+        }
+        if (a == 1) {
+            return b;
+        }
+        if (b == 1) {
+            return a;
+        }
+        return multiplyCur(a, b - 1) + a;
     }
 
 }
