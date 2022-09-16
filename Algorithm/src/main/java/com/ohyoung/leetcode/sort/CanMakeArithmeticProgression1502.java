@@ -25,8 +25,71 @@ package com.ohyoung.leetcode.sort;
  */
 public class CanMakeArithmeticProgression1502 {
 
+    public static void main(String[] args) {
+        CanMakeArithmeticProgression1502 example = new CanMakeArithmeticProgression1502();
+        System.out.println(example.canMakeArithmeticProgression(new int[]{3, 5, 1}));
+        System.out.println(example.canMakeArithmeticProgression(new int[]{1, 2, 4}));
+        System.out.println(example.canMakeArithmeticProgression(new int[]{1, 9, 13, 5, 21, 17}));
+
+    }
+
     public boolean canMakeArithmeticProgression(int[] arr) {
+        if (arr.length == 0) {
+            return false;
+        }
+        if (arr.length <= 2) {
+            return true;
+        }
+        quickSort(0, arr.length - 1, arr);
+        int gap = arr[1] - arr[0];
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] + gap != arr[i + 1]) {
+                return false;
+            }
+        }
         return true;
+    }
+
+    private void bubbleSort(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            boolean flag = true;
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int tmp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = tmp;
+                    flag = false;
+                }
+            }
+            if (flag) {
+                return;
+            }
+        }
+    }
+
+
+    private void quickSort(int start, int end, int[] arr) {
+        if (start >= end) {
+            return;
+        }
+        int partition = partition(start, end, arr);
+        quickSort(start, partition - 1, arr);
+        quickSort(partition + 1, end, arr);
+    }
+
+    private int partition(int start, int end, int[] a) {
+        int index = start;
+        int partition = a[end];
+        for (int i = start; i < end; i++) {
+            if (a[i] < partition) {
+                int tmp = a[i];
+                a[i] = a[index];
+                a[index++] = tmp;
+            }
+        }
+        a[end] = a[index];
+        a[index] = partition;
+        return index;
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  *  快速排序
+ *
  * @author ohYoung
  * @date 2020/12/1 17:27
  */
@@ -27,18 +28,19 @@ public class QuickSort {
 
     public static int partition(int[] a, int start, int end) {
         int index = start;
+        // partition可以根据算法定义的更准确,使得partition两侧元素的数量更均衡, 这里简单点直接取end的位置
         int partition = a[end];
         for (int i = start; i < end; i++) {
             if (a[i] < partition) {
                 int tmp = a[i];
                 a[i] = a[index];
-                a[index] = tmp;
-                index++;
+                a[index++] = tmp;
             }
         }
-        int tmp = a[end];
+        // 将partition调到中间位置, 使得左侧元素 < partition < 右侧元素
         a[end] = a[index];
-        a[index] = tmp;
+        a[index] = partition;
+        // 返回排序后partition所在的位置
         return index;
     }
 
