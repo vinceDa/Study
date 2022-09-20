@@ -1,0 +1,18 @@
+// [开始 头部声明]
+syntax = "proto3";
+package com.ohyoung.practise.protolbuf;
+// [结束 头部声明]
+
+// [开始 Java选项配置]
+option java_package = "com.ohyoung.practise.protolbuf";
+option java_outer_classname = "MsgProtos";
+// [结束 Java选项配置]
+
+// [开始 消息定义]
+message Msg {
+  // 消息id
+  uint32  id = 1;
+  // 消息内容
+  string content = 2;
+}
+// [结束 消息定义]

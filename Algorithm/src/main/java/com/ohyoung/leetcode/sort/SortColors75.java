@@ -1,5 +1,8 @@
 package com.ohyoung.leetcode.sort;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * 给定一个包含红色、白色和蓝色、共n 个元素的数组nums，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
  * 我们使用整数 0、1 和 2 分别表示红色、白色和蓝色。
@@ -28,9 +31,42 @@ package com.ohyoung.leetcode.sort;
  */
 public class SortColors75 {
 
-
-    public void sortColors(int[] nums) {
-
+    public static void main(String[] args) {
+        SortColors75 example = new SortColors75();
+        int[] nums = new int[]{2,0,2,1,1,0};
+        example.sortColors(nums);
+        System.out.println(Arrays.toString(nums));
+        nums = new int[]{2, 0, 1};
+        example.sortColors(nums);
+        System.out.println(Arrays.toString(nums));
+        nums = new int[]{2, 1};
+        example.sortColors(nums);
+        System.out.println(Arrays.toString(nums));
+        nums = new int[]{};
+        example.sortColors(nums);
+        System.out.println(Arrays.toString(nums));
     }
 
+    public void sortColors(int[] nums) {
+        if (nums.length < 2) {
+            return;
+        }
+        int start = 0;
+        int end = nums.length - 1;
+        int i = 0;
+        while (i <= end) {
+            if (nums[i] == 0) {
+                int tmp = nums[i];
+                nums[i] = nums[start];
+                nums[start++] = tmp;
+                i++;
+            } else if (nums[i] == 1) {
+                i++;
+            } else {
+                int tmp = nums[i];
+                nums[i] = nums[end];
+                nums[end--] = tmp;
+            }
+        }
+    }
 }
