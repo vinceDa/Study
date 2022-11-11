@@ -36,14 +36,29 @@ package com.ohyoung.leetcode.binarysearch;
  * @author ouyb01
  * @date 2022/6/14 9:28
  */
-public class FindMinInRotation_ {
+public class FindMin153 {
 
     public static void main(String[] args) {
 
     }
 
     public int findMin(int[] nums) {
-        return 0;
+        int min = 5001;
+        int low = 0;
+        int high = nums.length - 1;
+        while (low <= high) {
+            int mid = (high - low) / 2 + low;
+            if (nums[mid] < min) {
+                min = nums[mid];
+            }
+            // 处于递增区间
+            if ((mid != 0 && nums[mid] > nums[mid - 1]) || (mid != nums.length - 1 && nums[mid + 1] > nums[mid])) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return min;
     }
 
 }

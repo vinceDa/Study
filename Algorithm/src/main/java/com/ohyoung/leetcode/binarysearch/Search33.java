@@ -33,10 +33,10 @@ package com.ohyoung.leetcode.binarysearch;
  * @author ouyb01
  * @date 2022/6/14 9:27
  */
-public class SearchRotation {
+public class Search33 {
 
     public static void main(String[] args) {
-        SearchRotation example = new SearchRotation();
+        Search33 example = new Search33();
         int[] nums = new int[]{4, 5, 6, 7, 0, 1, 2};
         System.out.println(example.search(nums, 0));
         nums = new int[]{4, 5, 6, 7, 0, 1, 2};
@@ -48,7 +48,7 @@ public class SearchRotation {
     }
 
     /**
-     * 二分法+=左右探测
+     * 二分法+左右探测
      */
     public int search(int[] nums, int target) {
         int low = 0;
@@ -57,7 +57,11 @@ public class SearchRotation {
             int mid = low + (high - low) / 2;
             if (nums[mid] == target) {
                 return mid;
-            } else if (nums[mid] < target) {
+            }
+            if (mid == 0) {
+
+            }
+            if (nums[mid] < target) {
                 // 说明数组在递增
                 if ((mid != 0 && nums[mid] > nums[mid - 1]) || (mid != nums.length - 1 && nums[mid + 1] > nums[mid])) {
                     low = mid + 1;
