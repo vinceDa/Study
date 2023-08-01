@@ -31,10 +31,10 @@ import java.util.Arrays;
  * @author ouyb01
  * @date 2022/6/16 9:58
  */
-public class SearchRange {
+public class SearchRange34 {
 
     public static void main(String[] args) {
-        SearchRange example = new SearchRange();
+        SearchRange34 example = new SearchRange34();
         int[] nums = new int[]{5, 7, 7, 8, 8, 10};
         System.out.println(Arrays.toString(example.searchRange(nums, 8)));
         nums = new int[]{5, 7, 7, 8, 8, 10};

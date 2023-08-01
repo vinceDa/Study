@@ -35,10 +35,10 @@ package com.ohyoung.leetcode.binarysearch;
  * @author ouyb01
  * @date 2022/6/14 9:20
  */
-public class GuessGameSolution implements GuessGame {
+public class GuessGameSolution374 implements GuessGame {
 
     public static void main(String[] args) {
-        GuessGameSolution example = new GuessGameSolution();
+        GuessGameSolution374 example = new GuessGameSolution374();
         System.out.println(example.guessNumber(2));
     }
 

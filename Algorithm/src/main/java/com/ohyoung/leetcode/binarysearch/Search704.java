@@ -20,10 +20,10 @@ package com.ohyoung.leetcode.binarysearch;
  *
  * 链接：<a href="https://leetcode.cn/problems/binary-search">...</a>
  */
-public class Search {
+public class Search704 {
 
     public static void main(String[] args) {
-        Search example = new Search();
+        Search704 example = new Search704();
         int[] nums = new int[]{-1, 0, 3, 5, 9, 12};
         System.out.println(example.search(nums, 9));
         nums = new int[]{-1,0,3,5,9,12};

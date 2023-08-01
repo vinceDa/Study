@@ -28,10 +28,10 @@ package com.ohyoung.leetcode.binarysearch;
  * @author ouyb01
  * @date 2022/6/14 9:25
  */
-public class SearchInsert {
+public class SearchInsert35 {
 
     public static void main(String[] args) {
-        SearchInsert example = new SearchInsert();
+        SearchInsert35 example = new SearchInsert35();
         int[] nums = new int[]{1, 3, 5, 6};
         System.out.println(example.searchInsert(nums, 5));
         nums = new int[]{1, 3, 5, 6};
