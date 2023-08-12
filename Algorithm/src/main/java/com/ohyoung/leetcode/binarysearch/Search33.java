@@ -45,37 +45,56 @@ public class Search33 {
         System.out.println(example.search(nums, 0));
         nums = new int[]{3, 5, 1};
         System.out.println(example.search(nums, 3));
+        nums = new int[]{3, 1};
+        System.out.println(example.search(nums, 1));
+        nums = new int[]{5, 1, 3};
+        System.out.println(example.search(nums, 5));
+        nums = new int[]{3, 4, 5, 6, 1, 2};
+        System.out.println(example.search(nums, 2));
+        nums = new int[]{4, 5, 6, 7, 8, 1, 2, 3};
+        System.out.println(example.search(nums, 8));
     }
 
-    /**
-     * 二分法+左右探测
-     */
+
     public int search(int[] nums, int target) {
+        int length = nums.length;
+        if (length == 0) {
+            return -1;
+        }
+
+        if (length == 1) {
+            return nums[0] == target ? 0 : -1;
+        }
+
         int low = 0;
-        int high = nums.length - 1;
+        int high = length - 1;
+
         while (low <= high) {
             int mid = low + (high - low) / 2;
             if (nums[mid] == target) {
                 return mid;
             }
-            if (mid == 0) {
-
-            }
-            if (nums[mid] < target) {
-                // 说明数组在递增
-                if ((mid != 0 && nums[mid] > nums[mid - 1]) || (mid != nums.length - 1 && nums[mid + 1] > nums[mid])) {
-                    low = mid + 1;
-                } else {
+            // 判断mid的位置是处于翻转前还是翻转后
+            if (nums[0] <= nums[mid]) {
+                // mid处于翻转前
+                if (nums[0] <= target && target < nums[mid]) {
+                    // target在mid左侧
                     high = mid - 1;
+                } else {
+                    // target在mid右侧
+                    low = mid + 1;
                 }
             } else {
-                // 递减
-                if ((mid != 0 && nums[mid] < nums[mid - 1]) || (mid != nums.length - 1 && nums[mid + 1] < nums[mid])) {
-                    high = mid - 1;
-                } else {
+                // mid处于翻转后
+                if (nums[mid] < target && target <= nums[length - 1]) {
+                    // target在mid右侧
                     low = mid + 1;
+                } else {
+                    // target在mid左侧
+                    high = mid - 1;
                 }
             }
+
         }
         return -1;
     }
