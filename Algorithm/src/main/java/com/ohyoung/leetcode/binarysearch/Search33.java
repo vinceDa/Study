@@ -75,19 +75,19 @@ public class Search33 {
                 return mid;
             }
             // 判断mid的位置是处于翻转前还是翻转后
+            // mid处于翻转前
             if (nums[0] <= nums[mid]) {
-                // mid处于翻转前
+                // target在mid左侧
                 if (nums[0] <= target && target < nums[mid]) {
-                    // target在mid左侧
                     high = mid - 1;
                 } else {
                     // target在mid右侧
                     low = mid + 1;
                 }
-            } else {
                 // mid处于翻转后
+            } else {
+                // target在mid右侧
                 if (nums[mid] < target && target <= nums[length - 1]) {
-                    // target在mid右侧
                     low = mid + 1;
                 } else {
                     // target在mid左侧
