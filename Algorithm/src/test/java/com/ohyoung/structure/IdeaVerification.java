@@ -1,18 +1,19 @@
 package com.ohyoung.structure;
 
-import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUtil;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author ohYoung
  * @date 2020/12/8 11:23
  */
-public class IdeaVerification {
+public class IdeaVerification implements Serializable{
+
+    private static final Long serialVersionUID = 1L;
 
     @Test
     public void linkedHashMap() {
@@ -72,7 +73,13 @@ public class IdeaVerification {
 
     }
 
-    class Custom{
+    class Custom implements Serializable{
+
+        private static final long serialVersionUID = 1L;
+
+        public Custom() {
+
+        }
         private String name;
 
         private String value;
@@ -102,6 +109,30 @@ public class IdeaVerification {
         public void setChildren(List<Custom> children) {
             this.children = children;
         }
+    }
+
+    @Test
+    void testOOM() {
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        System.out.println("Max memory: " + maxMemory / 1024 / 1024 + "MB");
+
+
+        List<byte[]> list = new ArrayList<>();
+        int index = 0;
+        try {
+            while (true) {
+                System.out.println(index++);;
+                list.add(new byte[1024 * 1024 * 1024]); // 每次添加1GB的byte数组
+            }
+        } catch (OutOfMemoryError e) {
+            System.out.println("Caught OutOfMemoryError: " + e.getMessage());
+        }
+    }
+
+    @Test
+    void ObjectSize()  throws IOException {
+        Integer x = null;
+        System.out.println(x == 1);
     }
 
 }
