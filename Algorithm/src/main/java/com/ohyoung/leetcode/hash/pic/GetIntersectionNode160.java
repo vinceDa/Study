@@ -23,10 +23,10 @@ import java.util.Objects;
  * <a href="https://leetcode.cn/problems/intersection-of-two-linked-lists/"></a>
  * @author vince 2023/8/21 10:03
  */
-public class GetIntersectionNode_ {
+public class GetIntersectionNode160 {
 
     public static void main(String[] args) {
-        GetIntersectionNode_ getIntersectionNode = new GetIntersectionNode_();
+        GetIntersectionNode160 getIntersectionNode = new GetIntersectionNode160();
         ListNode headA = getIntersectionNode.new ListNode(4);
         headA.next = getIntersectionNode.new ListNode(1);
         headA.next.next = getIntersectionNode.new ListNode(8);
