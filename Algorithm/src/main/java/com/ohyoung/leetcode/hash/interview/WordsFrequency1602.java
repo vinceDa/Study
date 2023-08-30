@@ -1,5 +1,8 @@
 package com.ohyoung.leetcode.hash.interview;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 面试题 16.02. 单词频率
  *
@@ -26,16 +29,26 @@ package com.ohyoung.leetcode.hash.interview;
  * <a href="https://leetcode-cn.com/problems/words-frequency-lcci/"></a>
  * @author vince 2023/8/21 10:10
  */
-public class WordsFrequency_ {
-    public static void main(String[] args) {
+public class WordsFrequency1602 {
 
+    private Map<String, Integer> statistics;
+    public static void main(String[] args) {
+        WordsFrequency1602 wordsFrequency = new WordsFrequency1602(new String[]{"i", "have", "an", "apple", "he", "have", "a", "pen"});
+        System.out.println(wordsFrequency.get("you"));
+        System.out.println(wordsFrequency.get("have"));
+        System.out.println(wordsFrequency.get("an"));
+        System.out.println(wordsFrequency.get("apple"));
+        System.out.println(wordsFrequency.get("pen"));
     }
 
-    public WordsFrequency_(String[] book) {
-
+    public WordsFrequency1602(String[] book) {
+        statistics = new HashMap<>();
+        for (String s : book) {
+            statistics.put(s, statistics.getOrDefault(s, 0) + 1);
+        }
     }
 
     public int get(String word) {
-        return 0;
+        return statistics.getOrDefault(word, 0);
     }
 }
