@@ -31,7 +31,8 @@ public class QuickSort {
         // partition可以根据算法定义的更准确,使得partition两侧元素的数量更均衡, 这里简单点直接取end的位置
         int partition = a[end];
         for (int i = start; i < end; i++) {
-            if (a[i] < partition) {
+            // 这里需要加上等于, 不然会死循环
+            if (a[i] <= partition) {
                 int tmp = a[i];
                 a[i] = a[index];
                 a[index++] = tmp;
