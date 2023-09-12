@@ -1,5 +1,7 @@
 package com.ohyoung.leetcode.hash;
 
+import java.util.LinkedList;
+
 /**
  * 706. 设计哈希映射
  *
@@ -31,13 +33,13 @@ package com.ohyoung.leetcode.hash;
  * myHashMap.get(2);    // 返回 -1（未找到），myHashMap 现在为 [[1,1]]
  *
  * 提示：
- * 0 <= key, value <= 106
- * 最多调用 104 次 put、get 和 remove 方法
+ * 0 <= key, value <= 10^6
+ * 最多调用 10^4 次 put、get 和 remove 方法
  *
  * <a href="https://leetcode-cn.com/problems/design-hashmap/">706. 设计哈希映射</a>
  * @author vince 2023/8/21 11:49
  */
-public class MyHashMap_ {
+public class MyHashMap706 {
 
 
     /**
@@ -48,23 +50,80 @@ public class MyHashMap_ {
      * obj.remove(key);
      */
     public static void main(String[] args) {
-
+        MyHashMap706 myHashMap = new MyHashMap706();
+        myHashMap.put(1, 1);
+        myHashMap.put(2, 2);
+        System.out.println(myHashMap.get(1));
+        System.out.println(myHashMap.get(3));
+        myHashMap.put(2, 1);
+        System.out.println(myHashMap.get(2));
+        myHashMap.remove(2);
+        System.out.println(myHashMap.get(2));
     }
 
-    public MyHashMap_() {
+    private class Pair {
+        private Integer key;
+        private Integer value;
 
+        public Pair(Integer key, Integer value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public Integer getKey() {
+            return key;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
+
+        public void setValue(Integer value) {
+            this.value = value;
+        }
+    }
+
+    private static int SIZE = 769;
+
+    private LinkedList<Pair>[] data;
+
+    private Integer hash(Integer key) {
+        return key % SIZE;
+    }
+
+    public MyHashMap706() {
+        data = new LinkedList[SIZE];
+        for (int i = 0; i < SIZE; i++) {
+            data[i] = new LinkedList<Pair>();
+        }
     }
 
     public void put(int key, int value) {
-
+        Integer hash = hash(key);
+        for (Pair next : data[hash]) {
+            if (next.getKey() == key) {
+                next.setValue(value);
+                return;
+            }
+        }
+        data[hash].offerLast(new Pair(key, value));
     }
 
     public int get(int key) {
-        return 0;
+        Integer hash = hash(key);
+        for (Pair next : data[hash]) {
+            if (next.getKey() == key) {
+                return next.getValue();
+            }
+        }
+        return -1;
     }
 
     public void remove(int key) {
-
+        Integer hash = hash(key);
+        data[hash].removeIf(next -> next.getKey() == key);
     }
+
+
 
 }

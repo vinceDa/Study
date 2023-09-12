@@ -28,10 +28,10 @@ import java.util.stream.Collectors;
  *
  * @author vince 2023/8/21 11:48
  */
-public class RelativeSortArray_ {
+public class RelativeSortArray1122 {
 
     public static void main(String[] args) {
-        RelativeSortArray_ relativeSortArray = new RelativeSortArray_();
+        RelativeSortArray1122 relativeSortArray = new RelativeSortArray1122();
         int[] arr1 = new int[]{2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19};
         int[] arr2 = new int[]{2, 1, 4, 3, 9, 6};
         int[] sortArray = relativeSortArray.relativeSortArray(arr1, arr2);
